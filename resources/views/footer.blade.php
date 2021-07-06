@@ -1,69 +1,4 @@
 <style>
-<<<<<<< HEAD
-.bg-light {
-    background-color: #563d7c!important;
-}
-.row{
-        padding-bottom:-150px;
-        width:100%;
-}
-.row h5{
-        color:#fcec5d;
-        font-size:25px;
-        font-family: Montserrat,sans-serif;
-}
-.ho1{
-     border-right: 1px solid #fcec5d;
-     height: 200px;
-     margin-top:-170px;
-}
-.mb-2 a{
-font-family: Montserrat,sans-serif;
-font-size:25px;
-color:white;
-display:block
-}
-.mb-2 a:hover{
-        color:#fcec5d!important;
-        font-size:30px;
-           }
-#w{
-    margin-left:100px;
-}
-ul{
-    color:#fcec5d;
-}
-
-</style>
-<footer class="bd-footer py-5 mt-5 bg-light">
-<div class="container py-5">
-    <div class="row">
-      <div class="col-lg-3 mb-3">
-        <a class="d-inline-flex align-items-center mb-2 link-dark text-decoration-none" href="/" aria-label="Bootstrap">
-         <h5>Our Service</h5>
-        </a>
-        <ul class="list-unstyled small text-muted">
-          
-          <li class="mb-2"><a href="ethiozewaj.com">ethiozewaj.com</a></li>
-          <li class="mb-2"><a href="#">roomdelala.com</a></li>
-          <li class="mb-2"><a href="#">trustguardsecurity.com</a></li>
-          <li class="mb-2"><a href="#">edelala.com</a></li>
-          <li class="mb-2"><a href="#">richardsonstaffing.com</a></li>
-          <li class="mb-2"><a href="#">How it works</a></li>
-          <li class="mb-2"><a href="#">About us</a></li>
-          <li class="mb-2"><a href="#">Contact us</a></li>
-    
-        </ul>
-      </div>
-     
-    </div>
-  </div>
-  
-            
-</footer>
-
-
-=======
 @media (min-width: 768px)
 #footer {
     padding: 2rem 0 0;
@@ -227,4 +162,4 @@ ul{
             </div>
         </div>
     </div>
->>>>>>> caf6852 (crud)
+

@@ -19,11 +19,7 @@ class EventServiceProvider extends ServiceProvider
             SendEmailVerificationNotification::class,
         ],
     ];
-<<<<<<< HEAD
 
-=======
-    
->>>>>>> caf6852 (crud)
     /**
      * Register any events for your application.
      *
@@ -32,9 +28,6 @@ class EventServiceProvider extends ServiceProvider
     public function boot()
     {
         //
-<<<<<<< HEAD
-=======
-       
->>>>>>> caf6852 (crud)
+
     }
 }

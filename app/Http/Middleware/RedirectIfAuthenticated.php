@@ -22,10 +22,6 @@ class RedirectIfAuthenticated
         $guards = empty($guards) ? [null] : $guards;
 
         foreach ($guards as $guard) {
-<<<<<<< HEAD
-            if (Auth::guard($guard)->check()) {
-                return redirect(RouteServiceProvider::HOME);
-=======
             // if (Auth::guard($guard)->check()) {
             //     return redirect(RouteServiceProvider::HOME);
             // }
@@ -37,7 +33,6 @@ class RedirectIfAuthenticated
             }
             elseif(Auth::guard($guard)->check() && Auth()->user()->role=='Parent') {
                 return redirect()->route('parent.home');
->>>>>>> caf6852 (crud)
             }
         }
 

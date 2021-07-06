@@ -1,11 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-<<<<<<< HEAD
-=======
+
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\JobController;
->>>>>>> caf6852 (crud)
+
 
 /*
 |--------------------------------------------------------------------------
@@ -24,7 +23,7 @@ Route::get('/', function () {
 Route::get('/welcome', function () {
     return view('welcome');
 });
-<<<<<<< HEAD
+
 Route::get('/Habeshababysitters','App\Http\Controllers\frontController@frontMethod');
 Auth::routes();
 // Route::any('{stng}',function(){
@@ -33,7 +32,7 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/parent', [App\Http\Controllers\HomeController::class, 'parent'])->name('parent');
 Route::get('admin/home', [App\Http\Controllers\HomeController::class, 'adminHome'])->name('admin.home')->middleware('is_admin');
-=======
+
 Route::get('/about', function () {
     return view('about');
 });
@@ -88,4 +87,4 @@ Route::group(['prefix' => 'parent', 'middleware'=>['auth','is_parent','preventBa
 });
     Route::post('job',  [App\Http\Controllers\JobController::class, 'store'])->name('j.post');
 });
->>>>>>> caf6852 (crud)
+

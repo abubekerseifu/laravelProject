@@ -27,9 +27,8 @@ class LoginController extends Controller
      * @var string
      */
     protected $redirectTo = RouteServiceProvider::HOME;
-<<<<<<< HEAD
 
-=======
+
     protected function redirectTo(){
         if(Auth()->user()->role=='Admin'){
             return route('admin.dashboard');
@@ -42,7 +41,7 @@ class LoginController extends Controller
         }
 
     }
->>>>>>> caf6852 (crud)
+
     /**
      * Create a new controller instance.
      *
@@ -57,18 +56,10 @@ class LoginController extends Controller
         $this->validate($request,['email'=>'required|email',
         'password'=>'required']);
         if(auth()->attempt(array('email'=>$input['email'],'password'=>$input['password']))){
-<<<<<<< HEAD
+
             if(auth()->user()->is_admin==1){
                 return redirect()->route('admin.home');
             }
-            else{
-                if(auth()->user()->role=="Parent"){
-                    return redirect()->route('parent');
-                }
-                else{
-                return redirect()->route('home');
-            }}
-=======
             if(auth()->user()->role=='Admin'){
                 return redirect()->route('admin.dashboard');
             }
@@ -78,7 +69,7 @@ class LoginController extends Controller
                 elseif(auth()->user()->role=='Babysitter'){
                     return redirect()->route('babysitter.home');
                 }
->>>>>>> caf6852 (crud)
+
         }
             else{
                 return redirect()->route('login')->with('error',"Email or password is invalid");

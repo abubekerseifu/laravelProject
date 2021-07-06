@@ -8,10 +8,8 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-<<<<<<< HEAD
-=======
 use Illuminate\Auth\Events\Registered;
->>>>>>> caf6852 (crud)
+
 
 class RegisterController extends Controller
 {
@@ -74,9 +72,8 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
             'role' => $data['role'],
         ]);
-<<<<<<< HEAD
-=======
+
          event(new Registered($user));
->>>>>>> caf6852 (crud)
+
     }
 }

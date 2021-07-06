@@ -13,11 +13,10 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-<<<<<<< HEAD
+
         $this->middleware('auth');
-=======
-        $this->middleware(['auth','verified']);
->>>>>>> caf6852 (crud)
+        //$this->middleware(['auth','verified']);
+
     }
 
     /**
@@ -29,17 +28,4 @@ class HomeController extends Controller
     {
         return view('home');
     }
-<<<<<<< HEAD
-    public function adminHome()
-    {
-        return view('admin');
-    }
-     public function parent()
-    {
-        return view('parent');
-    }
-=======
-    
-    
->>>>>>> caf6852 (crud)
 }

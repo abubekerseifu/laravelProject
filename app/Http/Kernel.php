@@ -63,12 +63,11 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'is_admin'=> \App\Http\middleware\IsAdmin::class,
-<<<<<<< HEAD
-=======
+
          'is_babysitter'=> \App\Http\middleware\isBabysitter::class,
          'is_parent'=> \App\Http\middleware\isParent::class,
          'preventBackHistory'=> \App\Http\middleware\preventBackHistory::class,
 
->>>>>>> caf6852 (crud)
+
     ];
 }
