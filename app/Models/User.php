@@ -9,7 +9,8 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Model; 
 
 
-class User extends Authenticatable implements MustVerifyEmail
+class User extends Authenticatable 
+// implements MustVerifyEmail
 
 
 {
@@ -51,8 +52,19 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->role == $role;
     }
+    public function hasProfile($has_profile)
+    {
+        return $this->has_profile == $has_profile;
+    }
+    public function hasJob($has_job)
+    {
+        return $this->has_job == $has_job;
+    }
    public function profile(){
        return $this->hasOne(Profile::class);
+   }
+   public function setting(){
+       return $this->hasOne(Setting::class);
    }
    public function job(){
        return $this->hasOne(Job::class);

@@ -20,5 +20,4 @@
         </div>
     </div>
 </div>
-{{View::make('footer')}}
 @endsection

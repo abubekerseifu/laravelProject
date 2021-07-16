@@ -35,7 +35,11 @@ class CreateJobTable extends Migration
             $table->string('viber')->nullable();
             $table->string('telegram')->nullable();
             $table->mediumText('image')->nullable();
+            $table->enum('job_status', ['public', 'private'])->default('private');
+            $table->enum('approved',['yes','no'])->default('no');
+            $table->enum('paymet_status', ['paid', 'notyet'])->default('notyet');
             $table->date('start_date');
+            $table->string('description')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });

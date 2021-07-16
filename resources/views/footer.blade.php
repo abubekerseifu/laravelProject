@@ -1,165 +1,172 @@
-<style>
-@media (min-width: 768px)
-#footer {
-    padding: 2rem 0 0;
-}
-#footer {
-    background-color:#563d7c!important;
-    border-top: 1px solid #ddd;
-    bottom: 0;
-    color: #fff;
-    left: 0;
-    padding-top: .5rem;
-    margin-top:50px;
-    right: 0;
-    text-decoration:none;
-}
-#footer .devider {
-    border-top: 1px solid;
-     color:#fcec5d;
-    margin-bottom: 1.5rem;
-    margin-top: 1.5rem;
-    text-align: center;
-}
-@media (min-width: 768px)
-.d-md-block {
-    display: block!important;
-}
-#footer .social {
-    margin-top: 1rem;
-    text-align: center;
-}
-#footer .social li {
-    display: inline-block;
-    margin-right: .5rem;
-}
-@media (min-width: 768px)
-#footer .social a {
-    height: 2.8rem;
-    width: 2.8rem;
-}
-#footer .social a {
-    background-color: #fff;
-    border-radius: 50%;
-    display: block;
-    height: 2rem;
-    padding: 0;
-    text-align: center;
-    width: 2rem;
-}
-#footer a {
-    color: #fff;
-    font-weight: 400;
-    text-decoration: none;
-}
-#footer .row{
-  margin:auto;
- padding-left:400px;
-}
+<!doctype html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-#footer .bottom {
-    bottom: 0;
-    left: 0;
-    line-height: 2rem;
-    margin-top: 1rem;
-    padding: 1rem 0;
-    right: 0;
-}
-#footer h4{
-   color:#fcec5d;
-}
-#footer .bottom .wrapper {
-    padding: 0 env(safe-area-inset-right,0) env(safe-area-inset-bottom,0) env(safe-area-inset-left,0);
-    position: relative;
-    text-align: center;
-}
-#footer .bottom .copyright-wrapper .logo {
-    display: inline-block;
-    font-size: 1.5rem;
-    margin-bottom: -.25rem;
-    margin-right: .25rem;
-}
-#footer .bottom .copyright-wrapper .copyright {
-    display: inline-block;
-    font-size: .9rem;
-     color:#fcec5d;
-     margin-left:40px;
-}
-#footer a:hover{
-   color:#fcec5d;
-}
-#footer .social a:hover {
-    background-color: #59bec9;
-    text-decoration: none;
-}
-.social h2{margin-left:40px;}
-</style>
-<div class="clearfix" id="footer">
-        <div class="container-fluid">
-            <div class="row">
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-                <div class="col-sm-12 col-md-4 col-lg-3 list">
-                    <h4 class="d-none d-md-block">Habeshababysitters</h4>
-                    <ul style="list-style-type:none;" class="m-0 p-0">
-                        <li><a href="{{ url('howitworks') }}">How it works</a></li>
-                        <li><a href="/other/privacy/" rel="nofollow">Privacy</a></li>
-                        <li><a href="/other/terms/" rel="nofollow">Terms</a></li>
-                        <li><a href="{{ url('contactus') }}">Contact Us</a></li>
-                    </ul>
-                </div>
-                <div class="d-none d-md-block col-md-4 col-lg-3 list">
-                    <h4>Discover</h4>
-                    <ul style="list-style-type:none;" class="m-0 p-0">
-                        <li><a href="{{ url('about') }}">About us</a></li>
-                        <li><a href="#">Company details</a></li>
-                        <li><a href="#">Pricing</a></li>
-                        
-                    </ul>
-                </div>
-                <div class="d-none d-md-block col-md-4 col-lg-3 list">
-                    <h4>Our Services</h4>
-                    <ul style="list-style-type:none;" class="m-0 p-0">
-                        <li><a target="_blank" href={{'//www.ethiozewaj.com'}}>ethiozewaj.com</a></li>
-                        <li><a target="_blank" href="//www.roomdelala.com">roomdelala.com</a></li>
-                        <li><a target="_blank" href="//www.trustguardsecurity.com">trustguardsecurity.com</a></li>
-                        <li><a target="_blank" href="//www.edelala.com">edelala.com</a></li>
-                        <li><a target="_blank" href="//www.richardsonstaffing.com">richardsonstaffing.com</a></li>
-                                  </ul>
-                </div>
+
+    <title>{{ config('app.name', 'Habeshababysitters') }}</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/fontawesome.min.css">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
+   
+    <!-- Fonts -->
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <style>
+    p{
+        color:#999;
+        line-height:25px;
+    }
+    h2,h3{
+        color:#fff;
+    }
+    h2{
+        font-size:18px;
+    }
+    .footer-top{
+          background:#563d7c;
+          padding:80px 0;
+    }
+    .segment-one h3{
+        font-family:Courgette;
+        color:#fcec5d;
+        letter-spacing:3px;
+        margin:10px 0;
+    }
+    .segment-two h2{
+        font-family:Poppins;
+        color:#fff;
+        text-transform:uppercase;
+    }
+    .segment-two h2:before{
+        content:'|';
+        color:#fcec5d;
+        padding-right:10px;
+    }
+    .segment-two ul{
+        margin:0;
+        padding:0;
+        list-style:none;
+    }
+    .segment-two ul li{
+        border-bottom:1px solid #fcec5d;
+        line-height:40px;
+    }
+    .segment-two ul li a{
+        color:#fff!important;
+        text-decoration:none;
+    }
+    .segment-three h2{
+        color:#fff;
+        font-family:Poppins;
+        text-transform:uppercase;
+    }
+    .segment-three h2:before{
+        content:'|';
+        color:#fcec5d;
+        padding-right:10px;
+    }
+    .segment-three a{
+        background:#fcec5d;
+        width:30px;
+        height:30px;
+        display:inline-block;
+        border-radius:50%;
+    }
+    .segment-three a i{
+        font-size:15px;
+        color:#fff;
+        padding: 7px 8px;
+    }.segment-four h2{
+        color:#fff;
+        font-family:Poppins;
+        text-transform:uppercase;
+    }
+    .segment-four h2:before{
+        content:'|';
+        color:#fcec5d;
+        padding-right:10px;
+    }
+    .segment-four form input[type=submit]{
+        background:#fcec5d;
+        border:none;
+        padding:3px 15px;
+        margin-left:-5px;
+        color:#563d7c;
+        text-transform:uppercase;
+     }
+     .footer-bottom-text{
+         text-align:center;
+         background:#000;
+         line-height:75px;
+     }
+     /*responsive css */
+     @media only screen and (min-width 768px) and (max-width:991px){
+        .md-mb-30{
+            margin-bottom:30px;
+        }
+     }
+     @media only screen and (max-width:991px){
+         .sm-mb-30{
+             margin-bottom:30px;
+         }
+         .footer-top{
+             padding:50px 0;
+         }
+     }
+
+    </style>
+    </head>
+    <body>
+    <footer>
+        <div class="footer-top">
+        <div class="container">
+        <div class="row">
+            <div class="col-md-3 col-sm-6 col-xs-12 segment-one md-mb-30 sm-mb-30">
+                <h3>Habeshababysitters</h3>
+                <p>hdggggggggggggggggggggggg</p>
             </div>
-            <div class="devider d-none d-md-block"></div>
-
-
-            <div class="social">
-                <h2 class="d-none d-md-block">Follow us on</h2>
-                <ul>
-                    <li class="facebook"><a href="#" aria-label="Facebook" target="_blank" rel="nofollow noopener">
-                            <i class="inner-icon fab fa-facebook-f"></i>
-                    </a></li>
-                    <li class="telegram"><a href="#" aria-label="Instagram" target="_blank" rel="nofollow noopener">
-                            <i class="inner-icon fab fa-instagram"></i>
-                        </a></li>
-                   
-                    <li class="youtube"><a href="https://www.youtube.com/babysits" aria-label="YouTube" target="_blank" rel="nofollow noopener">
-                            <i class="inner-icon fab fa-youtube"></i>
-                    </a></li>
-                    
-                </ul>
+            <div class="col-md-3 col-sm-6 col-xs-12 segment-two md-mb-30 sm-mb-30">
+                <h2>usefullinks</h2>
+                 <ul>
+                 <li><a>event</a></li>
+                 <li><a>support</a></li>
+                 </ul>
             </div>
-
-        </div>
-
-        <div class="bottom">
-            <div class="container-fluid">
-                <div class="wrapper">
-                    <div class="copyright-wrapper">
-                        <!--<div class="logo">
-                            <svg viewBox="0 0 1000 1000" role="presentation" aria-hidden="true" focusable="false" style="height: 1em; width: 1em; display: block; fill: currentcolor;"><path class="st0" d="M935,559.1v117.5c0,111-90.3,201.2-201.2,201.2c-111,0-201.2-90.3-201.2-201.2v-96.1c0-146.8-119.4-266.3-266.3-266.3C119.4,314.2,0,433.7,0,580.5v349.8h65V580.5c0-111,90.3-201.2,201.2-201.2c111,0,201.2,90.3,201.2,201.2l0,96.1c0,146.8,119.4,266.2,266.3,266.2c146.8,0,266.3-119.4,266.3-266.2V559.1H935z"></path><circle class="st0" cx="266.3" cy="168.3" r="111.1"></circle><circle class="st0" cx="733.7" cy="716.2" r="84.9"></circle></svg>
-                        </div>-->
-                        <div class="copyright">© Habeshababysitters</div>
-                    </div>
-                </div>
+            <div class="col-md-3 col-sm-6 col-xs-12 segment-three sm-mb-30">
+            <h2>Follow us</h2>
+            <p>please follow us</p>
+            <a href="#"><i class="fa fa-facebook"></i></a>
+            <a href="#"><i class="fa fa-youtube"></i></a>
+            <a href="#"><i class="fa fa-telegram"></i></a>
+            <a href="#"><i class="fa fa-instagram"></i></a>
             </div>
-        </div>
-    </div>
-
+            <div class="col-md-3 col-sm-6 col-xs-12 segment-four sm-mb-30">
+            <h2>Our Newletter</h2>
+            <p>subscribe</p>
+            <form action="">
+                <input type="email">
+                <input type="submit" value="subscribe">
+                </form>
+            </div>
+            </div>
+            </div>
+            </div>
+            <p class="footer-bottom-text">All Right reserved by &copy;Habeshababysitter.2021</p>
+    </footer>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+</body>
+</html>

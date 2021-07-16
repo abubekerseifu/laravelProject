@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Job;
 use App\Models\User;
+use DB;
 // use App\Http\Controllers\Log;
 class JobController extends Controller
 {
@@ -15,7 +16,7 @@ class JobController extends Controller
      *
      * @return void
      */
-     public function __construct() { $this->middleware('auth'); }
+     public function __construct() { }
     // public function __construct()
     // {
     //     $this->middleware('guest');
@@ -49,6 +50,10 @@ class JobController extends Controller
     }
     protected function store(Request $request)
     {
+        DB::transaction(function () use ($request){
+        DB::table('users')
+        ->where('id', request()->user()->id)
+        ->update(array('has_job'=>"yes"));
          $job=new Job();
          $job->user_id=request()->user()->id;
          $job->fname= $request->fname;
@@ -70,27 +75,59 @@ class JobController extends Controller
          $job->whatsup = $request->whatsup;
          $job->viber = $request->viber;
          $job->telegram = $request->telegram;
+         $job->description=$request->description;
+         if($request->file('image')){
+             $file=$request->file('image');
+             $extension=$file->getClientOriginalExtension();
+             $filename=time().'.'.$extension;
+             $file->move("uploads/ParentImage/",$filename);
+             $job->image=$filename;
+         }
+         else{
+            $job->image="";
+         }
          $job->save();
+         });
          return view('welcome');
      
     }
     protected function alljob(){
-        return Job::select('fname','lname','address','gender','num_children')->orderBy('created_at')->get(); 
-//         as $profile) {
-//                 echo $profile->fname;
-// }
-// return Destination::orderByDesc(
-//     Flight::select('arrived_at')
-//         ->whereColumn('destination_id', 'destinations.id')
-//         ->orderBy('arrived_at', 'desc')
-//         ->limit(1)
-// )->get();
-        // $profile = Profile::where('status', 'active')
-        //        ->orderBy('created_at')
-        //        ->take(10)
-        //        ->get();
+        $jobs=DB::table('job')->select('*')->where('job_status', 'public')->where('approved', 'yes')->get();
+        return view('joblist')->with('jobs',$jobs);
+        //orderBy('created_at')->get();
     }
-    
+     protected function alljobAdmin(){
+        $jobs=Job::all();
+        return view('admin.parents')->with('jobs',$jobs);
+        //orderBy('created_at')->get();
+    }
+    protected function ShowSingleJob($id){
+    $job = DB::table('job')->select('*')->where('user_id', $id)->first();
+    return view('parent.jobdetail')->with('job',$job);
+}
+protected function ShowSingleJobByBabysitter($id){
+    $job = DB::table('job')->select('*')->where('job_id', $id)->first();
+    return view('babysitter.viewjobdetailbybabysitter')->with('job',$job);
+}
+protected function makeJobPublic($jid){
+    Job::where('job_id', $jid)->update(['job_status' => 'public']);
+    $job = DB::table('job')->select('*')->where('job_id', $jid)->first();
+    return view('parent.jobdetail')->with('job',$job);
+}
+protected function makeJobPrivate($jid){
+    Job::where('Job_id', $jid)->update(['job_status' => 'private']);
+    $job = DB::table('job')->select('*')->where('job_id', $jid)->first();
+    return view('parent.jobdetail')->with('job',$job);
+}
+protected function deleteJob(Request $request,$id){
+    DB::transaction(function () use ($request,$id){
+        DB::table('users')
+        ->where('id', request()->user()->id)
+        ->update(array('has_job'=>"no"));
+    DB::table('job')->where('job_id',$id)->delete();
+    });
+    return view('welcome');
+}
 }
 
            

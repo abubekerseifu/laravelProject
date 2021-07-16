@@ -26,7 +26,7 @@ class RedirectIfAuthenticated
             //     return redirect(RouteServiceProvider::HOME);
             // }
              if (Auth::guard($guard)->check() && Auth()->user()->role=='Admin') {
-                return redirect()->route('admin.dashboard');
+                return redirect()->route('admin.homedashboard');
             }
             elseif(Auth::guard($guard)->check() && Auth()->user()->role=='Babysitter') {
                 return redirect()->route('babysitter.home');

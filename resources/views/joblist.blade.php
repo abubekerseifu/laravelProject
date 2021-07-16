@@ -1,14 +1,33 @@
 @extends('layouts.app')
 <style>
-#c{
-    height:700px;
-
+#container{
+    margin-top:10%;
+     margin-bottom:-15px;
+     margin-left:30%;
+     margin-right:30%;
+     min-height:50%;
 }
 </style>
 @section('content')
-<div id="c">
-<h1>Babysitting job list</h1></div>
-{{View::make('footer')}}
+<div class="conatiner" id="container">
+<div class="jumbotorn">
+<table class="table table-borderless table-stripped table-hover table-secondary">
+    <thead>
+    
+  </thead>
+  <tbody>
+  @foreach($jobs as $job)
+    <tr>
+      <th><image src="{{asset('uploads/ParentImage/'. $job->image)}}" alt="image" width="100px" height="100px"></th>
+      <td>{{$job->fname}} {{$job->lname}}</td>
+      <td>{{$job->city}}</td>
+      <td><button type="button" class="btn btn-danger"><a href="{{ route('viewjob.detail',$job->job_id) }}">View Detail</button>
+    </td>
+    <td><button type="button" class="btn btn-warning" >contact {{$job->fname}}</a></button></td>
+    </tr>
+ @endforeach
+  </tbody>
+</table>
+</div>
+</div>
 @endsection
-
-

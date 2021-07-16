@@ -8,6 +8,5 @@
 @section('content')
 <div id="c">
 <h1>How Habeshababysitter works</h1></div>
-{{View::make('footer')}}
 @endsection
 

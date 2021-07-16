@@ -31,13 +31,13 @@ class LoginController extends Controller
 
     protected function redirectTo(){
         if(Auth()->user()->role=='Admin'){
-            return route('admin.dashboard');
+            return route('admin.homedashboard');
         }
         elseif(Auth()->user()->role=='Babysitter'){
-            return route('babysitter.home');
+            return route('home');
         }
         elseif(Auth()->user()->role=='Parent'){
-            return route('parent.home');
+            return route('home');
         }
 
     }
@@ -56,18 +56,14 @@ class LoginController extends Controller
         $this->validate($request,['email'=>'required|email',
         'password'=>'required']);
         if(auth()->attempt(array('email'=>$input['email'],'password'=>$input['password']))){
-
-            if(auth()->user()->is_admin==1){
-                return redirect()->route('admin.home');
-            }
             if(auth()->user()->role=='Admin'){
-                return redirect()->route('admin.dashboard');
+                return redirect()->route('admin.homedashboard');
             }
             elseif(auth()->user()->role=='Parent'){
-                    return redirect()->route('parent.home');
+                    return redirect()->route('home');
                 }
                 elseif(auth()->user()->role=='Babysitter'){
-                    return redirect()->route('babysitter.home');
+                    return redirect()->route('home');
                 }
 
         }

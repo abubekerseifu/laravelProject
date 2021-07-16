@@ -1,4 +1,3 @@
-
 @extends('layouts.app')
 <style>
 #c{
@@ -70,5 +69,4 @@
     </div>
 </div>
   
-{{View::make('footer')}}
 @endsection

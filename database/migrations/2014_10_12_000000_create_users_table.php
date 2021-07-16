@@ -18,12 +18,10 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
-<<<<<<< HEAD
-            $table->boolean('is_admin')->default(0);
-=======
->>>>>>> caf6852 (crud)
             $table->enum('role', ['Parent', 'Babysitter','Admin']);
             $table->string('password');
+            $table->enum('has_profile', ['yes', 'no'])->default('no');
+            $table->enum('has_job', ['yes', 'no'])->default('no');
             $table->rememberToken();
             $table->timestamps();
         });

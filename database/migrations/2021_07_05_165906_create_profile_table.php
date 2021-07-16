@@ -33,7 +33,11 @@ class CreateProfileTable extends Migration
             $table->string('whatsup')->nullable();
             $table->string('viber')->nullable();
             $table->string('telegram')->nullable();
+            $table->enum('profile_status', ['public', 'private'])->default('private');
+            $table->enum('approved',['yes','no'])->default('no');
+            $table->enum('paymet_status', ['paid', 'notyet'])->default('notyet');
             $table->mediumText('image')->nullable();
+            $table->string('description')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });

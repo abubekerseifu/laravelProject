@@ -1,40 +1,47 @@
- 
-@extends('layouts.app')
-<<<<<<< HEAD
+ @extends('layouts.app')
 
-=======
-<style>html,body
-                {
-                width: 100%;
-                height: 100%;
-                margin: 0px;
-                padding: 0px;
-                overflow-x: hidden; 
-                }
-                .card-header{
-                    background:white!important;
-                   
-                }
-                .container .justify-content-center{
-                    margin:auto;
-                     margin-top:100px;
-                     width:700px;
-                     
-                }
-                </style>
->>>>>>> caf6852 (crud)
+<style>
+#con{
+    width:27%;
+    height:35%;
+    margin-top:8%;
+    background:#F5F7F9;
+    border:1px solid #563d7c;
+    margin-bottom:8%;
+    font-family:serif;
+    font-size:10px;
+}
+#inner{
+    border:none;
+    background:#F5F7F9;
+    width:100%;
+}
+.card-header{
+    background:#F5F7F9!important;
+    color:#563d7c;
+    font-weight:200px;
+    font-size:30px;
+    margin-left:10%;
+    border:none;
+}
+.card-header p{
+    margin-left:20%;
+}
+
+
+             </style>
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
+<div class="container" id="con">
+    <div class="row justify-content-center" >
         <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
+            <div class="card" id="inner">
+                <div class="card-header"><p>Login</p></div>
 
-                <div class="card-body">
+                <div class="card-body" >
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
-                        <div class="form-group row">
+                        <div class="form-group row" >
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
                             <div class="col-md-6">
@@ -93,5 +100,4 @@
         </div>
     </div>
 </div>
-{{View::make('footer')}}
 @endsection

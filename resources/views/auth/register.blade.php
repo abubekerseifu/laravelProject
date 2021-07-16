@@ -1,15 +1,38 @@
 @extends('layouts.app')
 <style>
-#cb{
-    margin-left:100px;
+#con{
+    width:27%;
+    height:45%;
+    margin-top:8%;
+    background:#F5F7F9;
+    border:1px solid #563d7c;
+    margin-bottom:8%;
+    font-family:serif;
+    font-size:10px;
+}
+#inner{
+    border:none;
+    background:#F5F7F9;
+    width:100%;
+}
+.card-header{
+    background:#F5F7F9!important;
+    color:#563d7c;
+    font-weight:200px;
+    font-size:30px;
+    margin-left:10%;
+    border:none;
+}
+.card-header p{
+    margin-left:25%;
 }
 </style>
 @section('content')
-<div class="container">
+<div class="container" id="con">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
+            <div class="card" id="inner">
+                <div class="card-header"><p>Register</p></div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">
@@ -86,5 +109,4 @@
         </div>
     </div>
 </div>
-{{View::make('footer')}}
 @endsection

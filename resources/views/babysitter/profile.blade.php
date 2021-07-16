@@ -1,171 +1,13 @@
 @extends('layouts.app')
 <style>
-.subnav-wrapper {
-    background: #fff;
-    border-bottom: 1px solid #ddd;
-    margin-top:30px;
-}
-.sticky-top {
-    position: sticky;
-    top: 0;
-    z-index: 1020;
-}
-.container-fluid, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
-    max-width: 1300px;
-    padding-left: calc(24px + env(safe-area-inset-left, 0));
-    padding-right: calc(24px + env(safe-area-inset-right, 0));
-}
-.container, .container-fluid, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: var(--bs-gutter-x,.75rem);
-    padding-right: var(--bs-gutter-x,.75rem);
-    width: 100%;
-}
-.subnav-wrapper .subnav {
-    position: relative;
-}
-*, :after, :before {
-    box-sizing: border-box;
-}
-.subnav-wrapper .nav-tabs .nav-item.active a, .subnav-wrapper .nav-tabs .nav-item.active a:hover {
-    text-decoration: underline;
-}
-.subnav-wrapper .nav-tabs .nav-item a {
-    border-bottom: .3rem solid transparent;
-    color: #222;
-    display: block;
-    padding: .5rem 1rem .2rem;
-    text-decoration: none;
-}
-a {
-    font-weight: 700;
-}
-a {
-    color: #222;
-    text-decoration: underline;
-}
-*, :after, :before {
-    box-sizing: border-box;
-}
-user agent stylesheet
-a:-webkit-any-link {
-    color: -webkit-link;
-    cursor: pointer;
-    text-decoration: underline;
-}
-.subnav-wrapper .nav-tabs.full-width .nav-item {
-    display: inline-block;
-    white-space: nowrap;
-}
-
-user agent stylesheet
-li {
-    text-align: -webkit-match-parent;
-}
-.mainContent {
-    margin-top: 1rem;
-    min-height: 100vh;
-}
-.container-fluid, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
-    max-width: 1300px;
-    padding-left: calc(24px + env(safe-area-inset-left, 0));
-    padding-right: calc(24px + env(safe-area-inset-right, 0));
-}
-.container, .container-fluid, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: var(--bs-gutter-x,.75rem);
-    padding-right: var(--bs-gutter-x,.75rem);
-    width: 100%;
-}
-#profile-edit {
-    margin-bottom: 30px;
-}
-@media (min-width: 768px)
-#profile-edit .profile-photo .profile-photo-select {
-    height: 150px;
-    width: 150px;
-}
-#profile-edit .profile-photo .profile-photo-select {
-    align-items: center;
-    border: 1px solid #717171;
-    border-radius: .5rem;
-    display: flex;
-    height: 120px;
-    justify-content: center;
-    overflow: hidden;
-    position: relative;
-    width: 120px;
-}
-#profile-edit .profile-photo .profile-photo-input {
-    clip: rect(1px,1px,1px,1px);
-    height: 1px;
-    overflow: hidden;
-    position: absolute!important;
-    width: 1px;
-}
-#profile-edit .profile-photo .profile-photo-select .profile-photo-preview {
-    position: absolute;
-    width: 100%;
-}
-img {
-    height: auto;
-    max-width: 100%;
-}
-img, svg {
-    vertical-align: middle;
-}
-
-img[Attributes Style] {
-    width: 350px;
-    aspect-ratio: auto 350 / 350;
-    height: 350px;
-}
-#profile-edit .profile-photo .profile-photo-select .overlay {
-    background: #000;
-    border-radius: .5rem;
-    height: 100%;
-    opacity: .2;
-    position: absolute;
-    width: 100%;
-}
-.far {
-    font-weight: 400;
-}
-.input-group>.form-control, .input-group>.form-select {
-    flex: 1 1 auto;
-    min-width: 0;
-    position: relative;
-    width: 1%;
-}
-.autocomplete, .autocomplete .input-wrapper {
-    position: relative;
-}
-#profile-edit .birthdate {
-    display: flex;
-}
-.form-select {
-    -moz-padding-start: calc(.75rem - 3px);
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    background-color: #fff;
-    background-image: url(data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3E%3C/svg%3E);
-    background-position: right .75rem center;
-    background-repeat: no-repeat;
-    background-size: 16px 12px;
-    border: 1px solid #ced4da;
-    border-radius: .4rem;
-    color: #222;
-    display: block;
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 1.5;
-    padding: .375rem 2.25rem .375rem .75rem;
-    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-    width: 100%;
-}
+html,body
+                {
+                width: 100%;
+                height: 100%;
+                margin: 0px;
+                padding: 0px;
+                overflow-x: hidden; 
+                }
 .g-3{
     padding-bottom:10px;
 }
@@ -214,21 +56,38 @@ img[Attributes Style] {
         height:100%;
         width:100%;
     }
-    
+  #left{
+      margin-left:25%;
+      
+      background:grey;
+      padding-top:2%;
+      margin-top:-1.3%;
+      font-family:serif;
+      font-size:10px;
+  }
+form{
+    margin-left:5%;
+}
+form .g-3{
+    margin-left:7%;
+}
+form .g-3 h1,h2,h3,label{
+        margin-left:10%;
+        color:#fcec5d!important;
+        
+}
+.form-check-label{
+    margin-left:50%;
+}
+.save{
+    margin-top:5%;
+    margin-left:25%;
+    width:35%;
+}
 </style>
 
 @section('content')
-<div class="subnav-wrapper sticky-top">
-    <div class="container-fluid">
-        <div class="subnav">
-            <nav>
-                <ul class="nav nav-tabs full-width">
-                    <li class="nav-item  active"><a href="/dashboard/profile/"><i class="far fa-edit"></i> Edit profile</a></li>
-                </ul>
-            </nav>
-        </div>
-    </div>
-</div>
+
    <div class="mainContent">
             <div class="container-fluid">
             
@@ -236,27 +95,14 @@ img[Attributes Style] {
     <div class="container-fluid" id="profile-edit">
         <div class="row">
 
-                            <div class="col-lg-4 col-xl-3 order-lg-last">
-
-                    <div class="card border-light mb-5">
-                        <h3 class="card-header">Profile status</h3>
-                        <div class="card-body">
-                             <p class="text-danger">Please note that your profile is private and will therefore not appear in the search results.</p>
-                                <p><a href="/dashboard/profile/?visibility=public" class="btn btn-primary w-100">Make public</a></p>
-                                                    </div>
-                    </div>
-
-                </div>
             
-
-            
-<div class="col-lg-8 col-xl-9">
-                <form method="post" action="{{route('p.post')}}">
+<div class="col-lg-8 col-xl-6" id="left">
+                <form method="post" action="{{route('p.post')}}" enctype="multipart/form-data">
                 @csrf
                     <div class="mb-5 pb-5 border-bottom">
                         <div class="row justify-content-center" id="image_c">
 
-        <div class="wrapper"><input name="image" type="file" class="my_file" id="file"onchange="document.getElementById('i').src = window.URL.createObjectURL(this.files[0])"><img src="/image/2.jpg" id="i"></div>
+        <div class="wrapper"><input name="image" accept="image/*" type="file" class="my_file" id="file"onchange="document.getElementById('i').src = window.URL.createObjectURL(this.files[0])"><img src="/image/2.jpg" id="i"></div>
 </div>
 </div>     
                     <div class="mb-5 pb-5 border-bottom">
@@ -306,10 +152,11 @@ img[Attributes Style] {
                                 <option value="other">Other</option>
                             </select>
                         </div></div></div>
+                        <label class="col-form-label mt-2" for="birthdate_day">Date of birth</label>
                         <div class="row g-3">
                         <div class="col-sm-11">                                                 
                         <div class="mt-3">
-                            <label class="col-form-label" for="birthdate_day">Date of birth</label>
+                            
                             
                             <div class="birthdate">
                                 <div class="input-group">
@@ -317,7 +164,7 @@ img[Attributes Style] {
                                     value="2018-07-22"
                                     min="1900-01-01" max="2021-1-1">
                                 </div>
-                            </div> </div> <span class="col-form-label mt-2">Ask for permission from your parents if you are under 18 years old.</span></div>
+                            </div> </div> </div>
                        </div>
                          <label class="col-form-label mt-2" for="experience">Experience</label>
                          <div class="mb-5 pb-5 border-bottom">
@@ -344,6 +191,17 @@ img[Attributes Style] {
                  <div class="row g-3">
                
                 <div class="col-sm-11">
+
+                <p>
+  <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+    Link with href
+  </a>
+  <div class="collapse" id="collapseExample">
+  <div class="card card-body">
+    Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.
+  </div>
+</div>
+</p>
                         <div class="input-group">
                          <span class="input-group-text">$</span>
                             <select class="form-control" id="living" name="price">
@@ -425,8 +283,14 @@ img[Attributes Style] {
                 <span class="input-group-text">Viber</span>
                 <input class="form-control" name="viber" type="text" placeholder="Viber Number">
             </div></div></div>
+            <h2>Description</h2>
+                 <div class="row g-3">
+                <div  class="col-sm-11">
+                
+            <textarea rows = "5" cols = "116" maxlength = "100" name = "description" placeholder="Provide description here to increase the chance of your selectivity...">
+         </textarea></div></div>
                                         <div class="save">
-    <button type="submit" class="btn btn-primary btn-lg w-100">
+    <button type="submit" class="btn btn-danger btn-lg w-100">
         Post profile
     </button>
 </div>
@@ -442,5 +306,4 @@ img[Attributes Style] {
             </div>
             </div>
 </div></div>
-{{View::make('footer')}}
 @endsection

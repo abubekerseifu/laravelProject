@@ -19,7 +19,7 @@ class VerifyEmailController extends Controller
     {
         if ($request->user()->hasVerifiedEmail()) {
              if(auth()->user()->role=='Admin'){
-                return redirect()->route('admin.dashboard');
+                return redirect()->route('admin.homedashboard');
             }
             elseif(auth()->user()->role=='Parent'){
                     return redirect()->route('parent.home');
