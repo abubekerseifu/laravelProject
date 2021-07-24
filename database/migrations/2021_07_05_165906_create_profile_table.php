@@ -29,6 +29,7 @@ class CreateProfileTable extends Migration
             $table->enum('living_condition', ['live_in', 'back_forth']);
             $table->enum('weekend_break', ['yes', 'no']);
             $table->enum('chores', ['yes', 'no'])->nullable();
+            $table->enum('moc', ['yes', 'no']);
             $table->string('facebook')->nullable();
             $table->string('whatsup')->nullable();
             $table->string('viber')->nullable();

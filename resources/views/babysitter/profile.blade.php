@@ -57,33 +57,66 @@ html,body
         width:100%;
     }
   #left{
-      margin-left:25%;
       
-      background:grey;
-      padding-top:2%;
+      background:#F5F7F9;
+      padding-top:5%;
       margin-top:-1.3%;
       font-family:serif;
-      font-size:10px;
+      font-size:25px;
   }
-form{
+  input[type="text"]
+{
+    font-size:20px;
+}
+  input[type="date"]
+{
+    font-size:20px;
+}
+  input[type="radio"]
+{
+    font-size:20px;
+}
+ input[type="number"]
+{
+    font-size:20px;
+}
+#left form{
     margin-left:5%;
 }
-form .g-3{
+#left form .g-3{
     margin-left:7%;
 }
-form .g-3 h1,h2,h3,label{
+#left form h2{
         margin-left:10%;
-        color:#fcec5d!important;
-        
+        color:black!important;
+        font-size:25px!important;
+}
+#left form .g-3 h3{
+    margin-left:20%;
+    color:#563d7c!important;
+    font-size:20px!important;
 }
 .form-check-label{
     margin-left:50%;
 }
-.save{
-    margin-top:5%;
-    margin-left:25%;
-    width:35%;
+#collapse{
+        margin-left:10%;
 }
+.save{
+   margin-top:2%;
+}
+span{
+    font-size:25%;
+}
+.required:after {
+    content:" *";
+    color: red;
+  }
+  @media only screen and (min-width:360px) and (max-width:768px){
+        #left{
+            margin-top:-5.3%;
+        }
+     }
 </style>
 
 @section('content')
@@ -95,19 +128,19 @@ form .g-3 h1,h2,h3,label{
     <div class="container-fluid" id="profile-edit">
         <div class="row">
 
-            
-<div class="col-lg-8 col-xl-6" id="left">
+        
+<div class="col-lg-8 col-xl-10" id="left">
                 <form method="post" action="{{route('p.post')}}" enctype="multipart/form-data">
                 @csrf
                     <div class="mb-5 pb-5 border-bottom">
                         <div class="row justify-content-center" id="image_c">
 
-        <div class="wrapper"><input name="image" accept="image/*" type="file" class="my_file" id="file"onchange="document.getElementById('i').src = window.URL.createObjectURL(this.files[0])"><img src="/image/2.jpg" id="i"></div>
+        <div class="wrapper"><input name="image" accept="image/*" type="file" class="my_file" id="file" onchange="document.getElementById('i').src = window.URL.createObjectURL(this.files[0])"><img src="/uploads/Profile/av.png" id="i"></div>
 </div>
 </div>     
                     <div class="mb-5 pb-5 border-bottom">
 
-                        <h2>About me</h2>
+                        <h2 class="required">About me</h2>
 
 
                         
@@ -124,9 +157,9 @@ form .g-3 h1,h2,h3,label{
     <input type="number" name="numbers" class="form-control" placeholder="Phone Number" aria-label="phone">
   </div>
   </div>
-    <label class="col-form-label pt-0" for="area-address-suggest">
+    <h2 class="required">
         Address
-    </label>
+    </h2>
     
                 <div class="row g-3">
                 <div class="col-sm-11">
@@ -142,17 +175,17 @@ form .g-3 h1,h2,h3,label{
   </div>
                 
 </div>     
-                                                <label class="col-form-label mt-2" for="gender">Gender</label>
+                                                <h2 class="required">Gender</h2>
                                                  <div class="row g-3">
                 <div class="col-sm-11">
                         <div class="input-group">
-                            <select class="form-control" id="gender" name="gender" data-validation="empty" data-error="Select gender">
+                            <select class="form-control" style="font-size:20px;" id="gender" name="gender" data-validation="empty" data-error="Select gender">
                                 <option value="f" selected>Female</option>
                                 <option value="m">Male</option>
                                 <option value="other">Other</option>
                             </select>
                         </div></div></div>
-                        <label class="col-form-label mt-2" for="birthdate_day">Date of birth</label>
+                        <h2 class="required">Date of birth</h2>
                         <div class="row g-3">
                         <div class="col-sm-11">                                                 
                         <div class="mt-3">
@@ -160,140 +193,153 @@ form .g-3 h1,h2,h3,label{
                             
                             <div class="birthdate">
                                 <div class="input-group">
-                                    <input type="date" id="start" name="birth_date"
+                                    <input type="date" class="form-control" id="start" name="birth_date"
                                     value="2018-07-22"
                                     min="1900-01-01" max="2021-1-1">
                                 </div>
                             </div> </div> </div>
                        </div>
-                         <label class="col-form-label mt-2" for="experience">Experience</label>
+                         <h2 class="required">Experience</h2>
                          <div class="mb-5 pb-5 border-bottom">
                                                  <div class="row g-3">
                 <div class="col-sm-11">
                         <div class="input-group">
-                            <select class="form-control" name="experience">
-                                <option value="0" selected="selected">&lt; 1 year</option>
-                                <option value="1">&gt; 1 year</option>
-                                                                    <option value="2">&gt; 2 years</option>
-                                                                    <option value="3">&gt; 3 years</option>
-                                                                    <option value="4">&gt; 4 years</option>
-                                                                    <option value="5">&gt; 5 years</option>
-                                                                    <option value="6">&gt; 6 years</option>
-                                                                    <option value="7">&gt; 7 years</option>
-                                                                    <option value="8">&gt; 8 years</option>
-                                                                    <option value="9">&gt; 9 years</option>
-                                                                    <option value="10">&gt; 10 years</option>
-                                                                    <option value="11">&gt; 11 years</option>
+                            <select class="form-control" style="font-size:20px;" name="experience">
+                                <option value="<1" selected="selected">&lt; 1 year</option>
+                                <option value="1">1 year</option>
+                                                                    <option value="2">2 years</option>
+                                                                    <option value="3">3 years</option>
+                                                                    <option value="4">4 years</option>
+                                                                    <option value="5">5 years</option>
+                                                                    <option value="6">6 years</option>
+                                                                    <option value="7">7 years</option>
+                                                                    <option value="8">8 years</option>
+                                                                    <option value="9">9 years</option>
+                                                                    <option value="10">10 years</option>
+                                                                    <option value=">10">&gt; 10 years</option>
                                                             </select>
                             
                         </div></div></div></div>
-<h2>Pricing</h2>
+                         <p id="collapse">
+                       <i class="fa fa-info-circle" style="color:#563d7c;"></i><span style="font-size:15px;"> Some hint on pricing<br/>
+                       Most parents pay $1000 for 1 child only, $1200 for 2 children only and $1500 or above for 3 to 4  children and everything(chores)
+ 
+</span>
+
+</p>
+<h2 class="required">Pricing</h2>
                  <div class="row g-3">
                
                 <div class="col-sm-11">
 
-                <p>
-  <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-    Link with href
-  </a>
-  <div class="collapse" id="collapseExample">
-  <div class="card card-body">
-    Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.
-  </div>
-</div>
-</p>
+               
                         <div class="input-group">
-                         <span class="input-group-text">$</span>
-                            <select class="form-control" id="living" name="price">
-                             <option value="1500" selected>Price</option>
-                              <option value="1000">1000</option>
-                               
-                            </select>
-                            <span class="input-group-text">/child</span>
+                         <span class="input-group-text" style="font-size: 20px">$</span>
+                           <input name="price" class="form-control" autocomplete="off" type="text" placeholder="Enter prefered Price">
+
+                            <span class="input-group-text" style="font-size: 20px">/child</span>
                         </div></div></div>
+                        <h2 class="required">Comfortable with more than one child</h2>
+                        <div class="row g-3">
+                           
+                           
+                <div class="col-sm-2">
+                <div class="input-group">
+  <input class="form-check-input" type="radio" name="moc" value="yes" id="flexRadioDefault1">
+  <h3>
+    Yes
+  </h3>
+</div></div>
+ <div class="col-sm-2">
+ <div class="input-group">
+  <input class="form-check-input" type="radio" name="moc" value="no" id="flexRadioDefault2" checked>
+  <h3>
+    No
+  </h3></div>
+</div></div>
                                     <div class="mb-5 pb-5 border-bottom">            
-<label class="col-form-label mt-2" for="living">Living Condition</label>
+<h2 class="required">Living Condition</h2>
                                                  <div class="row g-3">
                 <div class="col-sm-11">
-                            <select class="form-control" id="living" name="living_condition">
+                            <select class="form-control" style="font-size:20px;" id="living" name="living_condition">
                                 <option value="back_forth">Back and Forth</option>
                                 <option value="live_in">Live In</option>
                                 <option value="" selected>Choose living preference</option>
                             </select>
                         </div></div></div>
-                        
+                        <h2 class="required">Break For Weekend</h2>
                            <div class="row g-3">
-                           <div class="col-sm-7">
-                           <label class="col-form-label mt-2" for="living">Break For Weekend</label><div>
+       
                 <div class="col-sm-2">
                 <div class="input-group">
   <input class="form-check-input" type="radio" name="weekend_break" value="yes" id="flexRadioDefault1">
-  <label class="form-check-label" for="flexRadioDefault1">
+  <h3>
     Yes
-  </label>
+  </h3>
 </div></div>
  <div class="col-sm-2">
  <div class="input-group">
   <input class="form-check-input" type="radio" name="weekend_break" value="no" id="flexRadioDefault2" checked>
-  <label class="form-check-label" for="flexRadioDefault2">
+  <h3>
     No
-  </label></div>
-</div></div></div></div>
-
+  </h3></div>
+</div></div>
+        <h2 class="required"> Comfortable with chores</h2>
        <div class="row g-3">
-                           <div class="col-sm-7">
-                           <label class="col-form-label mt-2" for="living"> Comfortable with chores</label><div>
+                         
                 <div class="col-sm-2">
                 <div class="input-group">
   <input class="form-check-input" type="radio" name="chores" value="yes" id="flexRadioDefault1">
-  <label class="form-check-label" for="flexRadioDefault1">
+  <h3>
     Yes
-  </label>
+  </h3>
 </div></div>
  <div class="col-sm-2">
  <div class="input-group">
   <input class="form-check-input" type="radio" name="chores" value="no" id="flexRadioDefault2" checked>
-  <label class="form-check-label" for="flexRadioDefault2">
+  <h3>
     No
-  </label></div>
-</div></div></div></div>
+  </h3></div>
+</div></div>
                                                               </div>
                                                               <h2>Social Media Contact</h2>
                  <div class="row g-3">
                 <div  class="col-sm-5">
                 <div class="input-group">
-                <span class="input-group-text">Facebook</span>
+                <span class="input-group-text" style="font-size: 20px">Facebook</span>
                 <input class="form-control" name="facebook" type="text" placeholder="Facebook username">
     
             </div></div>
             <div  class="col-sm-6">
                 <div class="input-group">
-                <span class="input-group-text">Telegram</span>
+                <span class="input-group-text" style="font-size: 20px">Telegram</span>
                <input class="form-control" name="telegram" type="text" placeholder="Telegram UserName or Number">
                
             </div></div></div>
              <div class="row g-3">
             <div  class="col-sm-5">
                 <div class="input-group">
-                <span class="input-group-text">WhatsUp</span>
+                <span class="input-group-text" style="font-size: 20px">WhatsUp</span>
                 <input class="form-control" name="whatsup" type="text" placeholder="WhatsUp Number">
             </div></div>
             <div  class="col-sm-6">
                 <div class="input-group">
-                <span class="input-group-text">Viber</span>
+                <span class="input-group-text" style="font-size: 20px">Viber</span>
                 <input class="form-control" name="viber" type="text" placeholder="Viber Number">
             </div></div></div>
             <h2>Description</h2>
                  <div class="row g-3">
                 <div  class="col-sm-11">
-                
-            <textarea rows = "5" cols = "116" maxlength = "100" name = "description" placeholder="Provide description here to increase the chance of your selectivity...">
-         </textarea></div></div>
-                                        <div class="save">
-    <button type="submit" class="btn btn-danger btn-lg w-100">
-        Post profile
+                <div class="input-group">
+            <textarea rows = "5" class="form-control" cols = "116" maxlength = "100" style="font-size: 20px" name ="description" placeholder="Provide description here to increase the chance of your selectivity..."></textarea></div>
+                                              <div class="save">
+    <button type="submit" class="btn btn-warning btn-lg w-100" style="font-size : 30px;color:#563d7c; height: 50px;">
+        Post Profile
     </button>
 </div>
+            </div>
+            </div>
+      
 
 
                    <input type="hidden" name="_csrf_token" value="39d3ef52.h5djrZI1dYxxlFnFmd6KQya06JE6XNmu0xuui9lqMU8.xOU0mdZ-HvUI5S_3rrTPKWmZset9EODbvlP_8bEzcnvJ0TL-wFIUyDz-YQ">

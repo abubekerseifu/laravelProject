@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Profile;
 use App\Models\Job;
+use DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -20,6 +22,27 @@ class AdminController extends Controller
         return view('admin.dashboard')->with('users',$users);
         //orderBy('created_at')->get();
     
+    }
+    protected function createUser(Request $request)
+    {
+       DB::transaction(function () use ($request){
+       $user=new User();
+        $user->name=$request->name;
+        $user->email=$request->email;
+        $user->password=Hash::make($request->password);
+        $user->role=$request->role;
+        $user->save();
+        
+    });
+    
+        $users=User::all();
+        return view('admin.dashboard')->with('users',$users);
+    }
+    protected function deleteUser(Request $request,$id){
+   
+        DB::table('users')->where('id',$id)->delete();
+        $users=User::all();
+        return view('admin.dashboard')->with('users',$users);
     }
     protected function makeAdmin($id){
     User::where('id', $id)->update(['role' => 'Admin']);

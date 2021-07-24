@@ -9,6 +9,7 @@ class Profile extends Model
 {
     use HasFactory;
     protected $table = 'profile';
+    protected $primaryKey = 'profile_id';
     protected $casts = [
         'facebook' => 'string',
         'whatsup' => 'string',

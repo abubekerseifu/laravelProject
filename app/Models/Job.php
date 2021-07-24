@@ -9,6 +9,7 @@ class Job extends Model
 {
     use HasFactory;
     protected $table = 'job';
+    protected $primaryKey = 'job_id';
     protected $casts = [
         'facebook' => 'string',
         'whatsup' => 'string',

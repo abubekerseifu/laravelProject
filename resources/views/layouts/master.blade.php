@@ -7,7 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-    
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
     <title>Admin Dashboard</title>
 </head>
 <style>
@@ -136,7 +137,7 @@
                         class="fas fa-cog me-2"></i>Babysitters</a>
                 <a href="{{ url('/admin/parents') }}" class="list-group-item list-group-item-action bg-transparent fw-bold"><i
                         class="fas fa-chart-line me-2"></i>Parents</a>
-                <a href="{{ url('/admin/settings') }}" class="list-group-item list-group-item-action bg-transparent fw-bold"><i
+                <a href="{{ route('v.setting',Auth::user()) }}" class="list-group-item list-group-item-action bg-transparent fw-bold"><i
                         class="fas fa-paperclip me-2"></i>Settings</a>
                  <!---<a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
                         class="fas fa-shopping-cart me-2"></i>Store Mng</a>
@@ -177,7 +178,7 @@
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="{{ url('/') }}">Home</a></li>
-                                <li><a class="dropdown-item" href="/admin/settings">Settings</a></li>
+                                <li><a class="dropdown-item" href="{{route('v.setting',Auth::user())}}">Settings</a></li>
                                 <li><a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

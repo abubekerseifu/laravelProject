@@ -56,33 +56,67 @@ html,body
         height:100%;
         width:100%;
     }
-  #left{
-      margin-left:25%;
-      background:grey;
-      padding-top:2%;
+   #left{
+      
+      background:#F5F7F9;
+      padding-top:5%;
       margin-top:-1.3%;
       font-family:serif;
-      font-size:10px;
+      font-size:25px;
   }
-form{
+  input[type="text"]
+{
+    font-size:20px;
+}
+  input[type="date"]
+{
+    font-size:20px;
+}
+  input[type="radio"]
+{
+    font-size:20px;
+}
+ input[type="number"]
+{
+    font-size:20px;
+}
+#left form{
     margin-left:5%;
 }
-form .g-3{
+#left form .g-3{
     margin-left:7%;
 }
-form .g-3 h1,h2,h3,label{
+#left form h2{
         margin-left:10%;
-        color:#fcec5d!important;
-        
+        color:black!important;
+        font-size:25px!important;
+}
+#left form .g-3 h3{
+    margin-left:20%;
+    color:#563d7c!important;
+    font-size:20px!important;
 }
 .form-check-label{
     margin-left:50%;
 }
-.save{
-    margin-top:5%;
-    margin-left:20%;
-    width:35%;
+#collapse{
+        margin-left:10%;
 }
+.save{
+   margin-top:2%;
+}
+span{
+    font-size:25%;
+}
+.required:after {
+    content:" *";
+    color: red;
+  }
+  @media only screen and (min-width:360px) and (max-width:768px){
+        #left{
+            margin-top:-5.3%;
+        }
+     }
 </style>
 
 @section('content')
@@ -105,22 +139,21 @@ form .g-3 h1,h2,h3,label{
             
 
             
-<div class="col-lg-8 col-xl-6" id="left">
+<div class="col-lg-8 col-xl-12" id="left">
                 <form method="post" enctype="multipart/form-data" action="{{route('j.post')}}">
                 @csrf
                     <div class="mb-5 pb-5 border-bottom">
                         <div class="row justify-content-center" id="image_c">
 
-        <div class="wrapper"><input type="file" name="image" class="my_file" id="file"onchange="document.getElementById('i').src = window.URL.createObjectURL(this.files[0])"><img src="/image/2.jpg" id="i"></div>
+        <div class="wrapper"><input type="file" name="image" class="my_file" id="file"onchange="document.getElementById('i').src = window.URL.createObjectURL(this.files[0])">
+        
+        <img src="/uploads/Profile/av.png" id="i"></div>
 </div>
 </div>     
 <div class="mb-5 pb-5 border-bottom">
 
-  <h3>Provide your details</h3><br/>
-
-
-                        
-                                                
+  <h2 class="required">Provide your details</h2>
+                                     
 
 <div class="row g-3">
   <div class="col-sm-3">
@@ -133,9 +166,9 @@ form .g-3 h1,h2,h3,label{
     <input type="text" name="phnumber" class="form-control" placeholder="Your Phone Number" aria-label="phone">
   </div>
   </div>
-    <label class="col-form-label pt-0" for="area-address-suggest">
+    <h2 class="required">
         Your Address
-    </label>
+    </h2>
     
                 <div class="row g-3">
                 <div class="col-sm-11">
@@ -149,148 +182,159 @@ form .g-3 h1,h2,h3,label{
                 <input type="text" name="city" class="form-control" placeholder="city" aria-label="city">
   </div>
   </div>
-   <label class="col-form-label pt-0" for="area-address-suggest">
-        Other
-    </label>
+   <h2 class="required">
+        Number of children
+    </h2>
       <div class="row g-3">
   <div class="col-sm-11">
     <input type="text" name="num_children" class="form-control" placeholder="Number of children" aria-label="n-children">
   </div></div> 
   
-  <label class="col-form-label pt-0" for="area-address-suggest">
+  <h2 class="required">
        Children Age Range
-    </label>
+    </h2>
     <div class="row g-3">
   <div class="col-sm-4">
     <input type="text" class="form-control" name="lower_age" placeholder="From -  " aria-label="n-children">
-    <span class="col-form-label mt-2"> </span></div>
+    <span style="font-size:15px;">For 1 child specify '0' here </span></div>
     <div class="col-sm-7">
     <input type="text" class="form-control" name="upper_age" placeholder="to - " aria-label="n-children">
   </div>  </div></div>
 <div class="mb-5 pb-5 border-bottom">
 
-                        <h3>Job Criteria</h3> 
-                                                <label class="col-form-label mt-2" for="gender">Gender</label>
+                        
+                                                <h2 class="required">Gender</h2>
                                                  <div class="row g-3">
                 <div class="col-sm-11">
                         <div class="input-group">
-                            <select class="form-control" id="gender" name="gender" data-validation="empty" data-error="Select gender">
+                            <select class="form-control" id="gender" style="font-size:20px;" name="gender" data-validation="empty" data-error="Select gender">
                                 <option value="f" selected>Female</option>
                                 <option value="m">Male</option>
                                 <option value="other">Other</option>
                             </select>
                         </div></div></div>
                         
-                        
-<label class="col-form-label mt-2" for="gender">Pricing</label>
-                 <div class="row g-3">
-               
-                <div class="col-sm-11">
-                        <div class="input-group">
-                         <span class="input-group-text">$</span>
-                            <select class="form-control" id="living" name="price">
-                             <option value="" selected>Price</option>
-                              <option value="1000">1000</option>
-                              <option value="1500" >1500</option>
-                               
-                            </select>
-                            <span class="input-group-text">/child</span>
-                        </div></div></div>
+
                                     <div class="mb-5 pb-5 border-bottom">            
-<label class="col-form-label mt-2" for="living">Living Condition</label>
+<h2 class="required">Living Condition</h2>
                                                  <div class="row g-3">
                 <div class="col-sm-11">
-                            <select class="form-control" id="living" name="living_condition">
+                            <select class="form-control" style="font-size:20px;" id="living" name="living_condition">
                                 <option value="back_forth">Back and Forth</option>
                                 <option value="live_in">Live In</option>
                                 <option value="" selected>Choose living preference</option>
                             </select>
                         </div></div></div>
                         <div class="mb-5 pb-5 border-bottom">
+                           <h2 class="required">Break For Weekend</h2>
                            <div class="row g-3">
-                           <div class="col-sm-7">
-                           <label class="col-form-label mt-2" for="living">Break For Weekend</label><div>
+                           
+                           
                 <div class="col-sm-2">
                 <div class="input-group">
   <input class="form-check-input" type="radio" name="weekend_break" value="yes" id="flexRadioDefault1">
-  <label class="form-check-label" for="flexRadioDefault1">
+  <h3>
     Yes
-  </label>
+  </h3>
 </div></div>
  <div class="col-sm-2">
  <div class="input-group">
   <input class="form-check-input" type="radio" name="weekend_break" value="no" id="flexRadioDefault2" checked>
-  <label class="form-check-label" for="flexRadioDefault2">
+  <h3>
     No
-  </label></div>
-</div></div></div></div>
-
-                    <div class="row g-3">
-                           <div class="col-sm-7">
-                           <label class="col-form-label mt-2" for="living">Extra work for adults</label><div>
+  </h3></div>
+</div></div>
+        <h2 class="required">Is there Extra work to be covered</h2>
+       <div class="row g-3">
+                         
                 <div class="col-sm-2">
                 <div class="input-group">
   <input class="form-check-input" type="radio" name="chores" value="yes" id="flexRadioDefault1">
-  <label class="form-check-label" for="flexRadioDefault1">
+  <h3>
     Yes
-  </label>
+  </h3>
 </div></div>
  <div class="col-sm-2">
  <div class="input-group">
   <input class="form-check-input" type="radio" name="chores" value="no" id="flexRadioDefault2" checked>
-  <label class="form-check-label" for="flexRadioDefault2">
+  <h3>
     No
-  </label></div>
-</div></div></div></div></div>
-<label class="col-form-label pt-0" for="area-address-suggest">
-Specify Starting Date<br/>
-    </label>
+  </h3></div>
+</div></div>
+                                                              </div>
+ <p id="collapse">
+                       <i class="fa fa-info-circle" style="color:#563d7c;"></i><span style="font-size:15px;"> Some hint on pricing<br/>
+                       Most parents pay $1000 for 1 child only, $1200 for 2 children only and $1500 or above for 3 to 4  children and everything(chores)
+ 
+</span>
+
+</p>
+<h2 class="required">Pricing</h2>
+                 <div class="row g-3">
+               
+                <div class="col-sm-11">
+
+               
+                        <div class="input-group">
+                         <span class="input-group-text" style="font-size: 20px">$</span>
+                           <input name="price" class="form-control" autocomplete="off" type="text" placeholder="Enter prefered Price">
+
+                            <span class="input-group-text" style="font-size: 20px">total</span>
+                        </div></div></div>
+                           
+<h2 class="required">Specify Starting Date</h2>
      <div class="row g-3">
   
     <div class="col-sm-11">
+      <div class="mt-3">
+     
+                            <div class="birthdate">
+                                <div class="input-group">
     <script>
     document.getElementById('start').value = new Date().toDateInputValue();
     </script>
-    <input type="date" id="start" name="start_date"
+    <input type="date" id="start" class="form-control" name="start_date"
                                   max="2050-1-1">
                             
-  </div></div> </div>                                                         
+  </div></div> </div>  </div> </div>                                                       
                                                               <h2>Social Media Contact</h2>
                  <div class="row g-3">
                 <div  class="col-sm-5">
                 <div class="input-group">
-                <span class="input-group-text">Facebook</span>
-                <input class="form-control" name="facebook" placeholder="Facebook username">
+                <span class="input-group-text" style="font-size: 20px">Facebook</span>
+                <input class="form-control" name="facebook" type="text" placeholder="Facebook username">
     
             </div></div>
             <div  class="col-sm-6">
                 <div class="input-group">
-                <span class="input-group-text">Telegram</span>
-               <input class="form-control" name="telegram" placeholder="Telegram UserName or Number">
+                <span class="input-group-text" style="font-size: 20px">Telegram</span>
+               <input class="form-control" name="telegram" type="text" placeholder="Telegram UserName or Number">
                
             </div></div></div>
              <div class="row g-3">
             <div  class="col-sm-5">
                 <div class="input-group">
-                <span class="input-group-text">WhatsUp</span>
-                <input class="form-control" name="whatsup" placeholder="WhatsUp Number">
+                <span class="input-group-text" style="font-size: 20px">WhatsUp</span>
+                <input class="form-control" name="whatsup" type="text" placeholder="WhatsUp Number">
             </div></div>
             <div  class="col-sm-6">
                 <div class="input-group">
-                <span class="input-group-text">Viber</span>
-                <input class="form-control" name="viber" placeholder="Viber Number">
-            </div></div>
+                <span class="input-group-text" style="font-size: 20px">Viber</span>
+                <input class="form-control" name="viber" type="text" placeholder="Viber Number">
+            </div></div></div>
             <h2>Description</h2>
                  <div class="row g-3">
                 <div  class="col-sm-11">
-                
-            <textarea rows = "5" cols = "116" maxlength = "100" name = "description" placeholder="Provide description here to clarify more about the job...">
-         </textarea></div></div>
+                 <div class="input-group">
+            <textarea rows = "5" class="form-control" cols = "126" maxlength = "100" style="font-size: 20px" name ="description" placeholder="Provide description here to increase the chance of your selectivity..."></textarea></div>
+            
                                         <div class="save">
-    <button type="submit" class="btn btn-danger btn-lg w-100">
+    <button type="submit" class="btn btn-warning btn-lg w-100" style="font-size : 30px;color:#563d7c; height: 50px;">
         Post Job
     </button>
-
+</div>
+            </div>
+            </div>
 
 
                     <input type="hidden" name="_csrf_token" value="39d3ef52.h5djrZI1dYxxlFnFmd6KQya06JE6XNmu0xuui9lqMU8.xOU0mdZ-HvUI5S_3rrTPKWmZset9EODbvlP_8bEzcnvJ0TL-wFIUyDz-YQ">
@@ -298,7 +342,7 @@ Specify Starting Date<br/>
                     
                     <div class="mb-5 pb-5"></div>
                 </form>
-            </div>
+           
             </div>
             </div>
 </div></div></div>

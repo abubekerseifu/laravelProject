@@ -18,10 +18,16 @@
   <tbody>
   @foreach($profiles as $profile)
     <tr>
-      <th><image src="{{asset('uploads/profile/'. $profile->image)}}" alt="image" width="100px" height="100px"></th>
+      <th>
+      @if($profile->image)
+      <image src="{{asset('uploads/Profile/'. $profile->image)}}" alt="image" width="100px" height="100px">
+        @else
+        <img src="/uploads/Profile/av.png" alt="image" width="100px" height="100px">
+        @endif
+      </th>
       <td>{{$profile->fname}} {{$profile->lname}}</td>
       <td>{{$profile->address}}</td>
-      <td><button type="button" class="btn btn-danger"><a href="{{ route('viewbabysitter.detail',$profile->profile_id) }}">View Detail</a></button>
+      <td><a href="{{ route('viewbabysitter.detail',$profile->profile_id) }}" type="button" class="btn btn-danger">View Detail</a>
     </td>
     <td><button type="button" class="btn btn-warning">Hire</button></td>
     </tr>

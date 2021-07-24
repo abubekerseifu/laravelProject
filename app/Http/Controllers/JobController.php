@@ -84,7 +84,7 @@ class JobController extends Controller
              $job->image=$filename;
          }
          else{
-            $job->image="";
+            $job->image='/av.png';
          }
          $job->save();
          });
@@ -127,6 +127,42 @@ protected function deleteJob(Request $request,$id){
     DB::table('job')->where('job_id',$id)->delete();
     });
     return view('welcome');
+}
+protected function updateJob(Request $request,$job_id){
+        $job = Job::find($job_id);
+       $job->fname= $request->fname;
+         $job->lname= $request->lname;
+         $job->phnumber= $request->phnumber;
+         $job->address= $request->address;
+         $job->city= $request->city;
+         $job->country= $request->country;
+         $job->gender= $request->gender;
+         $job->num_children= $request->num_children;
+         $job->upper_age = $request->upper_age;
+         $job->lower_age = $request->lower_age;
+         $job->price = $request->price;
+         $job->living_condition = $request->living_condition;
+         $job->weekend_break = $request->weekend_break;
+         $job->chores = $request->chores;
+         $job->start_date = $request->start_date;
+         $job->facebook = $request->facebook;
+         $job->whatsup = $request->whatsup;
+         $job->viber = $request->viber;
+         $job->telegram = $request->telegram;
+         $job->description=$request->description;
+         if($request->file('image')){
+             $file=$request->file('image');
+             $extension=$file->getClientOriginalExtension();
+             $filename=time().'.'.$extension;
+             $file->move("uploads/ParentImage/",$filename);
+             $job->image=$filename;
+         }
+         else{
+            $job->image='/av.png';
+         }
+         $job->save();
+    $job = DB::table('job')->select('*')->where('job_id', $job_id)->first();
+    return view('parent.jobdetail')->with('job',$job);
 }
 }
 

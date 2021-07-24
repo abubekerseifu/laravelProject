@@ -145,8 +145,8 @@ margin-top:50px;
     <h1>Habeshababysitters</h1>
     <p>Great Babysitter in your area!</p>
     <div class="slider-btn">
-     <button class="btn btn-1">Babysitters to hire</button>
-     <button class="btn btn-2">Babysitting jobs to be hired</button>
+     <a href="{{ url('babysitterlist') }}" class="btn btn-1">Babysitters to hire</a>
+     <a href="{{ url('joblist') }}" class="btn btn-2">Babysitting jobs to be hired</a>
     </div>
   </div>
     </div>
@@ -158,8 +158,8 @@ margin-top:50px;
     
     <p>Great Babysitter in your area!</p>
    <div class="slider-btn">
-     <button class="btn btn-1">Babysitters to hire</button>
-     <button class="btn btn-2">Babysitting jobs to be hired</button>
+     <a href="{{ url('babysitterlist') }}" class="btn btn-1">Babysitters to hire</a>
+     <a href="{{ url('joblist') }}" class="btn btn-2">Babysitting jobs to be hired</a>
     </div>
     </div>
   </div>
@@ -172,8 +172,8 @@ margin-top:50px;
    
     <p>Great Babysitter in your area!</p>
     <div class="slider-btn">
-     <button class="btn btn-1">Babysitters to hire</button>
-     <button class="btn btn-2">Babysitting jobs to be hired</button>
+     <a href="{{ url('babysitterlist') }}" class="btn btn-1">Babysitters to hire</a>
+     <a href="{{ url('joblist') }}" class="btn btn-2">Babysitting jobs to be hired</a>
     </div>
     </div>
   </div>

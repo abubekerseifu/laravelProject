@@ -10,14 +10,20 @@
 
     <title>{{ config('app.name', 'Habeshababysitters') }}</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/fontawesome.min.css">
+    
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-       <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+          <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+
+
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -144,7 +150,7 @@
          line-height:75px;
      }
      /*responsive css */
-     @media only screen and (min-width 768px) and (max-width:991px){
+     @media only screen and (min-width:768px) and (max-width:991px){
         .md-mb-30{
             margin-bottom:30px;
         }
@@ -162,7 +168,12 @@
          width:100%;
         
      }
-
+nav a{
+    font-size:15px;
+}
+.segment-four li a{
+     font-size:15px;
+}
     </style>
   
     
@@ -201,19 +212,7 @@
   <!--right side-->
   <div class="collapse navbar-collapse navigation-menu">
     <ul class="navbar-nav ml-auto">
-    <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-         Our Services
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" target="_blank" href={{'//www.ethiozewaj.com'}}>ethiozewaj.com</a>
-          <a class="dropdown-item" target="_blank" href="//www.roomdelala.com">roomdelala.com</a>
-                        <a class="dropdown-item" target="_blank" href="//www.trustguardsecurity.com">trustguardsecurity.com</a>
-                        <a class="dropdown-item" target="_blank" href="//www.edelala.com">edelala.com</a>
-                        <a class="dropdown-item" target="_blank" href="//www.richardsonstaffing.com">richardsonstaffing.com</a>
-
-        </div>
-      </li>
+    
      @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
@@ -243,7 +242,7 @@
                                     </a>
                                 @endif
                                 @if(Auth::user()->hasRole('Admin'))
-                                    <a class="dropdown-item" href="/admin/settings">Setting </a>
+                                    <a class="dropdown-item" href="{{ route('v.setting',Auth::user()) }}">Setting </a>
                                 @endif
                                 @if(Auth::user()->hasRole('Babysitter'))
                                 @if(Auth::user()->hasProfile('yes'))
@@ -315,6 +314,20 @@
                 <input type="email">
                 <input type="submit" value="subscribe">
                 </form>
+                <ul>
+                <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+         Our Services
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" target="_blank" href="//www.edelala.com">Edelala</a>
+          <a class="dropdown-item" target="_blank" href={{'//www.ethiozewaj.com'}}>Ethiozewaj</a>
+          <a class="dropdown-item" target="_blank" href="//www.roomdelala.com">Roomdelala</a>
+                        <a class="dropdown-item" target="_blank" href="//www.trustguardsecurity.com">Trustguardsecurity</a>
+                        <a class="dropdown-item" target="_blank" href="//www.richardsonstaffing.com">Richardsonstaffing</a>
+
+        </div>
+      </li></ul>
             </div>
             </div>
             </div>
