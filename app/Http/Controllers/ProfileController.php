@@ -76,7 +76,7 @@ class ProfileController extends Controller
              $profile->image=$filename;
          }
          else{
-            $profile->image="/image/av.png";
+            $profile->image="";
          }
          $profile->facebook = $request->facebook;
          $profile->whatsup = $request->whatsup;
@@ -98,18 +98,33 @@ class ProfileController extends Controller
     protected function allprofile(){
     $alwayss = DB::table('settings')->pluck('always_approve');
     foreach ($alwayss as $always) {
+       
         if($always=='yes'){
             $profiles=DB::table('profile')->select('*')->where('profile_status', 'public')->where('approved', 'yes')->get();
+            // return Datatables::of($profiles)
+            //     ->addIndexColumn()
+            //     ->addColumn('action', function($row){
+            //         $actionBtn = '<a href="javascript:void(0)" class="edit btn btn-success btn-sm">View Detail</a> <a href="javascript:void(0)" class="delete btn btn-danger btn-sm">Contact</a>';
+            //         return $actionBtn;
+            //     })
+            //     ->rawColumns(['action'])
+            //     ->make(true);
         }
         else{
              $profiles=Profile::all();
+            //   return Datatables::of($profiles)
+            //     ->addIndexColumn()
+            //     ->addColumn('action', function($row){
+            //         $actionBtn = '<a href="javascript:void(0)" class="edit btn btn-success btn-sm">View Detail</a> <a href="javascript:void(0)" class="delete btn btn-danger btn-sm">Contact</a>';
+            //         return $actionBtn;
+            //     })
+            //     ->rawColumns(['action'])
+            //     ->make(true);
         }
-        }
         
-        View::share ( 'profiles', $profiles);
+    }
         
-        
-        return view('babysitterlist');
+        return view('babysitterlist')->with('profiles',$profiles);
         //orderBy('created_at')->get();
     
 }
@@ -151,9 +166,7 @@ protected function updateProfile(Request $request,$profile_id){
              $file->move("uploads/Profile/",$filename);
              $profile->image=$filename;
          }
-         else{
-            $profile->image='/av.png';
-         }
+         
          $profile->facebook = $request->facebook;
          $profile->whatsup = $request->whatsup;
          $profile->viber = $request->viber;
@@ -162,7 +175,7 @@ protected function updateProfile(Request $request,$profile_id){
          $profile->description = $request->description;
          $profile->save();
          $profile = DB::table('profile')->select('*')->where('profile_id', $profile_id)->first();
-    return redirect()->route('babysitter.home');
+    return redirect()->back();
 }
 protected function makeProfilePublic($pid){
     Profile::where('profile_id', $pid)->update(['profile_status' => 'public']);

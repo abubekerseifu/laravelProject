@@ -22,7 +22,7 @@
       @if($profile->image)
       <image src="{{asset('uploads/Profile/'. $profile->image)}}" alt="image" width="100px" height="100px">
         @else
-        <img src="/uploads/Profile/av.png" alt="image" width="100px" height="100px">
+        <img src="{{asset('image/av.png')}}" alt="image" width="100px" height="100px">
         @endif
       </th>
       <td>{{$profile->fname}} {{$profile->lname}}</td>

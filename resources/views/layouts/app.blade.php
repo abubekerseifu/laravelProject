@@ -14,13 +14,20 @@
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+          <link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet">
+
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
           <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
 
 
 
@@ -38,7 +45,8 @@
                 height: 100%;
                 margin: 0px;
                 padding: 0px;
-                overflow-x: hidden; 
+                overflow-x: hidden;
+                font-family:Poppins-Regular; 
                 }
         @media(min-width:992px){
             .navbar-expand-lg .navbar-collapse{
@@ -195,7 +203,7 @@ nav a{
         <a class="nav-link" href="{{ url('') }}">Home</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link active" href="{{ url('babysitterlist') }}">Babysitters <span class="sr-only">(current)</span></a>
+        <a class="nav-link active" href="{{ route('babysitters.list') }}">Babysitters <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
       <a class="nav-link" href="{{ url('joblist') }}">Babysitting Jobs</a>
@@ -311,7 +319,7 @@ nav a{
             <h2>Our newsletter</h2>
             <p>subscribe for latest updates</p>
             <form action="">
-                <input type="email">
+                <input>
                 <input type="submit" value="subscribe">
                 </form>
                 <ul>
@@ -334,7 +342,7 @@ nav a{
             </div>
             <p class="footer-bottom-text">All Right reserved by &copy;Habeshababysitter.2021</p>
     </footer>
-    
+
 </body>
 </html>
 </body>

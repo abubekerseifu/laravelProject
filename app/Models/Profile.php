@@ -10,6 +10,11 @@ class Profile extends Model
     use HasFactory;
     protected $table = 'profile';
     protected $primaryKey = 'profile_id';
+    protected $fillable = [
+        'fname',
+        'lname',
+        
+    ];
     protected $casts = [
         'facebook' => 'string',
         'whatsup' => 'string',

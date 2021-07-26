@@ -8,7 +8,7 @@ class BabysitterController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth']);
+        $this->middleware(['auth','verified']);
         //,'verified'
     }
 

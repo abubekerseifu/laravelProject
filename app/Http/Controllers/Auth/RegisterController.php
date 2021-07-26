@@ -76,9 +76,10 @@ class RegisterController extends Controller
             'role' => $data['role'],
         ]);
         Setting::create(['user_id'=>$user->id]);
-         return $user;});
-        //  event(new Registered($user));
-       
+               
+
+         return $user;
+        });
         return $user;
     }
     

@@ -43,13 +43,16 @@ Route::get('/welcome', function () {
 Route::get('/about', function () {
     return view('about');
 });
+// Route::get('/babysitters', function () {
+//     return view('babysitterlist');
+// });
 Route::get('/howitworks', function () {
     return view('howitworks');
 });
 Route::get('/contactus', function () {
     return view('contactus');
 });
-Route::get('/babysitterlist','App\Http\Controllers\ProfileController@allprofile');
+Route::get('/babysitters','App\Http\Controllers\ProfileController@allprofile')->name('babysitters.list');
 Route::get('/joblist', 'App\Http\Controllers\JobController@alljob');
 Route::get('/babysitterdetail/{profile_id}','App\Http\Controllers\ProfileController@ShowSingleProfileByParent')->name('viewbabysitter.detail');
 Route::get('/jobdetail/{id}','App\Http\Controllers\JobController@ShowSingleJobByBabysitter')->name('viewjob.detail');
@@ -79,7 +82,7 @@ Route::middleware(['middleware'=>'preventBackHistory'])->group(function(){
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::group(['prefix' => 'admin', 'middleware'=>['auth','is_admin','preventBackHistory','verified']], function () {
+Route::group(['prefix' => 'admin', 'middleware'=>['auth','is_admin','preventBackHistory']], function () {
     Route::get('/home/dashboard',[App\Http\Controllers\AdminController::class,'adminHome'])->name('admin.homedashboard');
     Route::get('/babysitters','App\Http\Controllers\ProfileController@allprofileAdmin');
     Route::get('/parents', 'App\Http\Controllers\JobController@alljobAdmin');
@@ -91,7 +94,7 @@ Route::group(['prefix' => 'admin', 'middleware'=>['auth','is_admin','preventBack
     Route::get('/approve/job/{job_id}','App\Http\Controllers\AdminController@approveJob')->name('approve.job');
     Route::get('/disapprove/job/{job_id}','App\Http\Controllers\AdminController@disApproveJob')->name('disapprove.job');
     Route::post('/register/user','App\Http\Controllers\AdminController@createUser')->name('r.user');
-        Route::get('/delete/user/{user_id}','App\Http\Controllers\AdminController@deleteUser')->name('delete.user');
+    Route::get('/delete/user/{user_id}','App\Http\Controllers\AdminController@deleteUser')->name('delete.user');
 
 });
 

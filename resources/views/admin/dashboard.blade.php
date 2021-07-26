@@ -46,7 +46,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Edit Your Profile</h5>
-        <a type="button" class="btn-close" data-dismiss="modal" aria-label="Close"><i class="fa fa-times-circle" style="font-size:12px;"></i></a>
+        <a type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></a>
       </div>
       <div class="modal-body">
      <form method="POST" action="{{ route('r.user') }}" enctype="multipart/form-data">

@@ -9,7 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Model; 
 
 
-class User extends Authenticatable 
+class User extends Authenticatable
 // implements MustVerifyEmail
 
 
@@ -69,11 +69,11 @@ class User extends Authenticatable
    public function job(){
        return $this->hasOne(Job::class);
    }
-    public function handle(Registered $event)
-    {
-        if ($event->user instanceof MustVerifyEmail && ! $event->user->hasVerifiedEmail()) {
-            $event->user->sendEmailVerificationNotification();
-        }
-    }
+    // public function handle(Registered $event)
+    // {
+    //     if ($event->user instanceof MustVerifyEmail && ! $event->user->hasVerifiedEmail()) {
+    //         $event->user->sendEmailVerificationNotification();
+    //     }
+    // }
 
 }

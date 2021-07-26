@@ -22,7 +22,10 @@ class ProfileFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'user_id'=>100,
+            'fname' => $this->faker->name,
+            'lname' => $this->faker->name,
+            
         ];
     }
 }

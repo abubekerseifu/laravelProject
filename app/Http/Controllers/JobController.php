@@ -84,7 +84,7 @@ class JobController extends Controller
              $job->image=$filename;
          }
          else{
-            $job->image='/av.png';
+            $job->image="";
          }
          $job->save();
          });
@@ -157,12 +157,10 @@ protected function updateJob(Request $request,$job_id){
              $file->move("uploads/ParentImage/",$filename);
              $job->image=$filename;
          }
-         else{
-            $job->image='/av.png';
-         }
+         
          $job->save();
     $job = DB::table('job')->select('*')->where('job_id', $job_id)->first();
-    return view('parent.jobdetail')->with('job',$job);
+    return redirect()->back();
 }
 }
 
