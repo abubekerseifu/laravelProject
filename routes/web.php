@@ -6,7 +6,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\Auth\RegisterController;
-
+use App\Http\Controllers\StripeController;
 
 
 /*
@@ -33,8 +33,8 @@ Route::get('/parent/{id}/job/detail','App\Http\Controllers\JobController@ShowSin
 Route::get('/welcome', function () {
     return view('first');
 });
-
-
+Route::get('stripe', 'App\Http\Controllers\StripeController@stripe');
+Route::post('stripe', 'App\Http\Controllers\StripeController@stripePost')->name('stripe.post');
 // Route::any('{stng}',function(){
 //     return view('first');
 // });
@@ -54,7 +54,7 @@ Route::get('/contactus', function () {
 });
 Route::get('/babysitters','App\Http\Controllers\ProfileController@allprofile')->name('babysitters.list');
 Route::get('/joblist', 'App\Http\Controllers\JobController@alljob');
-Route::get('/babysitterdetail/{profile_id}','App\Http\Controllers\ProfileController@ShowSingleProfileByParent')->name('viewbabysitter.detail');
+Route::get('/joblist/contacted', 'App\Http\Controllers\JobController@contacted')->name('parent.contacted');
 Route::get('/jobdetail/{id}','App\Http\Controllers\JobController@ShowSingleJobByBabysitter')->name('viewjob.detail');
 
 // Route::get('/babysitter/profile', function () {
@@ -94,6 +94,8 @@ Route::group(['prefix' => 'admin', 'middleware'=>['auth','is_admin','preventBack
     Route::get('/approve/job/{job_id}','App\Http\Controllers\AdminController@approveJob')->name('approve.job');
     Route::get('/disapprove/job/{job_id}','App\Http\Controllers\AdminController@disApproveJob')->name('disapprove.job');
     Route::post('/register/user','App\Http\Controllers\AdminController@createUser')->name('r.user');
+    Route::post('/post/profile','App\Http\Controllers\AdminController@postProfile')->name('p.profile.admin');
+    Route::post('/post/job','App\Http\Controllers\AdminController@postJob')->name('p.job.admin');
     Route::get('/delete/user/{user_id}','App\Http\Controllers\AdminController@deleteUser')->name('delete.user');
 
 });
@@ -108,6 +110,9 @@ Route::group(['prefix' => 'babysitter', 'middleware'=>['auth','is_babysitter','p
     Route::get('/delete/profile/{profile_id}','App\Http\Controllers\ProfileController@deleteProfile')->name('delete.profile');
     Route::put('/update/profile/{profile_id}','App\Http\Controllers\ProfileController@updateProfile')->name('p.update');
     Route::get('/{id}/profile/detail','App\Http\Controllers\ProfileController@ShowSingleProfile')->name('babysitter.detail');
+    Route::get('/contactinfo/{job_id}','App\Http\Controllers\JobController@viewParentContact')->name('v.parent.contactinfo');
+    Route::get('/makepayment/{job_id}', 'App\Http\Controllers\JobController@viewPaymenttForm')->name('v.babysitter.stripe');
+    Route::post('/makepayment/{job_id}', 'App\Http\Controllers\JobController@makePay')->name('stripe.babysitter.post');
 });
 
 Route::group(['prefix' => 'parent', 'middleware'=>['auth','is_parent','preventBackHistory']], function () {
@@ -120,5 +125,9 @@ Route::group(['prefix' => 'parent', 'middleware'=>['auth','is_parent','preventBa
     Route::get('/makejob/private/{job_id}','App\Http\Controllers\JobController@makeJobPrivate')->name('makeprivate.job');
     Route::get('/delete/job/{job_id}','App\Http\Controllers\JobController@deleteJob')->name('delete.job');
     Route::put('/update/job/{job_id}','App\Http\Controllers\JobController@updateJob')->name('j.update');
+    Route::get('/contactinfo/{profile_id}','App\Http\Controllers\ProfileController@viewBabysitterContact')->name('v.babysitter.contactinfo');
+    Route::get('/makepayment/{profile_id}', 'App\Http\Controllers\ProfileController@viewPaymenttForm')->name('v.parent.stripe');
+    Route::post('/makepayment/{profile_id}', 'App\Http\Controllers\ProfileController@makePay')->name('stripe.parent.post');
 });
+    Route::get('/babysitterdetail/{profile_id}','App\Http\Controllers\ProfileController@ShowSingleProfileByParent')->name('viewbabysitter.detail');
 

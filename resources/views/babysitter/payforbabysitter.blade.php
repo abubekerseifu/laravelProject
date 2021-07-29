@@ -42,7 +42,7 @@
                      </div>
                      @endif
                      <br>
-                     <form role="form" action="{{ route('stripe.post') }}" method="post" class="require-validation" data-cc-on-file="false" data-stripe-publishable-key="{{ env('STRIPE_KEY') }}" id="payment-form">
+                     <form role="form" action="{{ route('stripe.parent.post',$profile->profile_id) }}" method="post" class="require-validation" data-cc-on-file="false" data-stripe-publishable-key="{{ env('STRIPE_KEY') }}" id="payment-form">
                         @csrf
                          <div class='form-row row'>
                            <div class='col-xs-12 col-md-4 form-group cvc required'>
@@ -78,8 +78,6 @@
                               <h3 class='control-label' style="color:black;">Expiration Year</h3> 
                               <input class='form-control card-expiry-year' placeholder='YYYY' size='4' type='text'>
                            </div>
-                           
-                           
                         </div>
                        
                       {{-- <div class='form-row row'>

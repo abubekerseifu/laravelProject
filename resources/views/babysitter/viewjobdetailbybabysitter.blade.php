@@ -15,7 +15,7 @@
 <tbody>
     <tr>
     <td></td><td></td>
-    <td><button type="button" class="btn btn-warning">Contact {{$job->fname}}</button>
+    <td><a href="{{route('v.babysitter.stripe',$job->job_id)}}" type="button" class="btn btn-warning">Contact {{$job->fname}}</button>
   </tr>
   <tr>
   <td></td>

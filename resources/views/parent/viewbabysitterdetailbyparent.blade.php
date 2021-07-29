@@ -15,7 +15,7 @@
 <tbody>
     <tr>
     <td></td><td></td>
-    <td><button type="button" class="btn btn-warning">Contact</button>
+    <td><a href="{{route('v.parent.stripe',$profile->profile_id)}}" type="button" class="btn btn-warning">Contact {{$profile->fname}}</a>
   </tr>
   <tr>
   <td></td>

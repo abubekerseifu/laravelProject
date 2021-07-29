@@ -25,9 +25,14 @@
         @endif</th>
       <td>{{$job->fname}} {{$job->lname}}</td>
       <td>{{$job->city}}</td>
-      <td><button type="button" class="btn btn-danger"><a href="{{ route('viewjob.detail',$job->job_id) }}">View Detail</button>
+      <td><a href="{{ route('viewjob.detail',$job->job_id) }}" type="button" class="btn btn-danger">View Detail</a>
     </td>
-    <td><button type="button" class="btn btn-warning" >contact {{$job->fname}}</a></button></td>
+
+    <td>
+    @if($n_payment=='yes')
+    <a href="{{route('v.babysitter.stripe',$job->job_id)}}" type="button" class="btn btn-warning">contact {{$job->fname}}</a>
+    @endif
+    </td>
     </tr>
  @endforeach
   </tbody>

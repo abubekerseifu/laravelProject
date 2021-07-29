@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Job;
 use App\Models\User;
 use DB;
+use View;
 // use App\Http\Controllers\Log;
 class JobController extends Controller
 {
@@ -91,12 +92,34 @@ class JobController extends Controller
          return view('welcome');
      
     }
+    // protected function contacted(){
+    //             $jobs=DB::table('job')->select('*')->where('job_status', 'public')->where('approved', 'yes')->get();
+    //             $contacted='yes';
+    //             View::share('contacted',$contacted);
+    //             return view('joblist')->with('jobs',$jobs);
+
+    // }
     protected function alljob(){
         $jobs=DB::table('job')->select('*')->where('job_status', 'public')->where('approved', 'yes')->get();
+        $babysitter_payments = DB::table('settings')->pluck('babysitter_make_p');
+    foreach ($babysitter_payments as $babysitter_payment) {
+       
+        if($babysitter_payment=='yes'){
+            $n_payment='yes';
+           
+        }
+        else{
+             $n_payment='no';
+        }
+                View::share('n_payment',$n_payment);
+
+    }
         return view('joblist')->with('jobs',$jobs);
         //orderBy('created_at')->get();
     }
      protected function alljobAdmin(){
+        $parents=DB::table('users')->select('*')->where('role', 'Parent')->where('has_job','no')->get();
+        View::share('parents',$parents);
         $jobs=Job::all();
         return view('admin.parents')->with('jobs',$jobs);
         //orderBy('created_at')->get();
@@ -162,6 +185,38 @@ protected function updateJob(Request $request,$job_id){
     $job = DB::table('job')->select('*')->where('job_id', $job_id)->first();
     return redirect()->back();
 }
+ public function viewPaymenttForm($job_id)
+    {
+        $job = DB::table('job')->select('*')->where('job_id', $job_id)->first();
+        View::share('job',$job);
+        return view('parent.payforparent');
+    }
+    public function viewParentContact(Request $request,$job_id)
+    {
+        $job = DB::table('job')->select('*')->where('job_id', $job_id)->first();
+        View::share('job',$job);
+        return view('parent.bcontactinfo');
+    }
+    
+    public function makePay(Request $request,$job_id)
+    {
+       $out = new \Symfony\Component\Console\Output\ConsoleOutput();
+       $out->writeln("before stripe");
+       Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+       Stripe\Charge::create ([
+                "amount" => 100 * 250,
+                "currency" => "usd",
+                "source" => $request->stripeToken,
+                "description" => "This payment is for testing purpose from habeshababysitters.com"
+        ]);
+            DB::table('payment_job')->insert([
+                'user_id' => request()->user()->id,
+                'job_id' => $job_id,
+                'paymet_status' => 'paid'
+                ]);
+        Session::flash('success', 'Payment successful!');
+        return redirect()->route('v.parent.contactinfo',['job_id'=>$job_id]);
+    }
 }
 
            

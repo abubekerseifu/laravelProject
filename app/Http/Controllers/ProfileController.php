@@ -8,6 +8,8 @@ use App\Models\User;
 use App\Models\Setting;
 use DB;
 use View;
+use Stripe;
+use Session;
 // use App\Http\Controllers\Log;
 class ProfileController extends Controller
 {
@@ -101,40 +103,28 @@ class ProfileController extends Controller
        
         if($always=='yes'){
             $profiles=DB::table('profile')->select('*')->where('profile_status', 'public')->where('approved', 'yes')->get();
-            // return Datatables::of($profiles)
-            //     ->addIndexColumn()
-            //     ->addColumn('action', function($row){
-            //         $actionBtn = '<a href="javascript:void(0)" class="edit btn btn-success btn-sm">View Detail</a> <a href="javascript:void(0)" class="delete btn btn-danger btn-sm">Contact</a>';
-            //         return $actionBtn;
-            //     })
-            //     ->rawColumns(['action'])
-            //     ->make(true);
+           
         }
         else{
              $profiles=Profile::all();
-            //   return Datatables::of($profiles)
-            //     ->addIndexColumn()
-            //     ->addColumn('action', function($row){
-            //         $actionBtn = '<a href="javascript:void(0)" class="edit btn btn-success btn-sm">View Detail</a> <a href="javascript:void(0)" class="delete btn btn-danger btn-sm">Contact</a>';
-            //         return $actionBtn;
-            //     })
-            //     ->rawColumns(['action'])
-            //     ->make(true);
+           
         }
         
     }
         
         return view('babysitterlist')->with('profiles',$profiles);
         //orderBy('created_at')->get();
-    
 }
  protected function allprofileAdmin(){
         
         $profiles=Profile::all();
+        $babysitters=DB::table('users')->select('*')->where('role', 'Babysitter')->where('has_profile','no')->get();
+        View::share('babysitters',$babysitters);
         return  view('admin.babysitters')->with( 'profiles', $profiles);
         //orderBy('created_at')->get();
     
 }
+ 
 protected function ShowSingleProfile($id){
     $profile = DB::table('profile')->select('*')->where('user_id', $id)->first();
     return view('babysitter.profiledetail')->with('profile',$profile);
@@ -144,8 +134,8 @@ protected function ShowSingleProfileByParent($profile_id){
     return view('parent.viewbabysitterdetailbyparent')->with('profile',$profile);
 }
 protected function updateProfile(Request $request,$profile_id){
-        $profile = Profile::find($profile_id);
-        $profile->fname= $request->fname;
+         $profile = Profile::find($profile_id);
+         $profile->fname= $request->fname;
          $profile->lname= $request->lname;
          $profile->numbers= $request->numbers;
          $profile->address= $request->address;
@@ -196,4 +186,36 @@ protected function deleteProfile(Request $request,$id){
     });
     return view('welcome');
 }
+    public function viewPaymenttForm($profile_id)
+    {
+        $profile = DB::table('profile')->select('*')->where('profile_id', $profile_id)->first();
+        View::share('profile',$profile);
+        return view('babysitter.payforbabysitter');
+    }
+    public function viewBabysitterContact(Request $request,$profile_id)
+    {
+        $profile = DB::table('profile')->select('*')->where('profile_id', $profile_id)->first();
+        View::share('profile',$profile);
+        return view('babysitter.bcontactinfo');
+    }
+    
+    public function makePay(Request $request,$profile_id)
+    {
+       $out = new \Symfony\Component\Console\Output\ConsoleOutput();
+       $out->writeln("before stripe");
+       Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+       Stripe\Charge::create ([
+                "amount" => 100 * 250,
+                "currency" => "usd",
+                "source" => $request->stripeToken,
+                "description" => "This payment is for testing purpose from habeshababysitters.com"
+        ]);
+            DB::table('payment_profile')->insert([
+                'user_id' => request()->user()->id,
+                'profile_id' => $profile_id,
+                'paymet_status' => 'paid'
+                ]);
+        Session::flash('success', 'Payment successful!');
+        return redirect()->route('v.babysitter.contactinfo',['profile_id'=>$profile_id]);
+    }
 }

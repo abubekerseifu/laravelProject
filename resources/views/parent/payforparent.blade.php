@@ -42,7 +42,7 @@
                      </div>
                      @endif
                      <br>
-                     <form role="form" action="{{ route('stripe.post') }}" method="post" class="require-validation" data-cc-on-file="false" data-stripe-publishable-key="{{ env('STRIPE_KEY') }}" id="payment-form">
+                     <form role="form" action="{{ route('stripe.babysitter.post',$job->job_id) }}" method="post" class="require-validation" data-cc-on-file="false" data-stripe-publishable-key="{{ env('STRIPE_KEY') }}" id="payment-form">
                         @csrf
                          <div class='form-row row'>
                            <div class='col-xs-12 col-md-4 form-group cvc required'>

@@ -4,7 +4,7 @@
 #c {
     
     min-height:70%;
-      font-size:18px;
+    font-size:18px;
       
 }
 
