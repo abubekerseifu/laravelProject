@@ -170,10 +170,19 @@ span{
        <td><b>Socila Contacts <br/><b>Facebook : </b> {{$job->facebook}}<br/>
        <b>Whatsup : </b>{{$job->whatsup}} <br/>
        <b>Viber : </b>{{$job->viber}}<br/>
-       <b>Tekegram : </b>{{$job->telegram}}</td>
+       <b>Telegram : </b>{{$job->telegram}}</td>
     </tr>
     <tr><td></td><td></td>
-    <td><b>Description : </b>{{$job->description}}</td></tr>
+    <td><b>Description : </b>{{$job->description}}</br>
+    @foreach($contacted as $c)
+    @if($c)
+    
+    Contacted : by {{$name->fname}}     <a href="{{route('viewbabysitter.detail',$name->profile_id)}}" class="btn btn-primary">View Detail</a>
+</br>
+
+    @endif
+    @endforeach
+    </td></tr>
   </tbody>
 </table>
 </div>

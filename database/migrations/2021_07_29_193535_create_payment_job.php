@@ -16,6 +16,7 @@ class CreatePaymentJob extends Migration
         Schema::create('payment_job', function (Blueprint $table) {
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('job_id');
+            $table->enum('contacted', ['yes', 'no'])->default('no');
             $table->enum('paymet_status', ['paid', 'notyet'])->default('notyet');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('job_id')->references('job_id')->on('job')->onDelete('cascade');

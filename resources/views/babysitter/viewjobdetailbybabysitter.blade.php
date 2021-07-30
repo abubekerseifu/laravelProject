@@ -15,11 +15,24 @@
 <tbody>
     <tr>
     <td></td><td></td>
-    <td><a href="{{route('v.babysitter.stripe',$job->job_id)}}" type="button" class="btn btn-warning">Contact {{$job->fname}}</button>
+    <td>
+    @if($n_payment=='yes')
+    <a href="{{route('v.babysitter.stripe',$job->job_id)}}" type="button" class="btn btn-warning">Contact {{$job->fname}}</a>
+  @else
+  @if($contacted=='no')
+  <a href="{{route('contact.parent',$job->job_id)}}" type="button" class="btn btn-warning">Contact {{$job->fname}}</a>
+    @else
+        <span style="background:white">Interest sent,waiting to be contacted</span>
+    @endif
+    @endif
   </tr>
   <tr>
   <td></td>
-  <td><image src="{{asset('uploads/ParentImage/'. $job->image)}}" alt="image" width="100px" height="100px"></td>
+  <td>
+  @if($job->image)
+<image src="{{asset('uploads/ParentImage/'. $job->image)}}" alt="image" width="100px" height="100px">        @else
+        <img src="/uploads/Profile/av.png" alt="image" width="100px" height="100px">
+        @endif</td>
   <td><b>Name : </b>{{$job->fname}} {{$job->lname}}<br/><b> Gender : </b>{{$job->gender}} <br/><b> Birth-Date : </b>{{$job->start_date}}</td>
       
       </tr>

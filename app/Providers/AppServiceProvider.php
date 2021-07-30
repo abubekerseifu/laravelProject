@@ -24,6 +24,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+    
     $user_num = DB::table('users')->select('*')->count();
     View::share ( 'user_num', $user_num);
     $b_num = DB::table('users')->select('*')->where('role','Babysitter')->count();

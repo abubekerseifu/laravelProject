@@ -54,7 +54,9 @@ Route::get('/contactus', function () {
 });
 Route::get('/babysitters','App\Http\Controllers\ProfileController@allprofile')->name('babysitters.list');
 Route::get('/joblist', 'App\Http\Controllers\JobController@alljob');
-Route::get('/joblist/contacted', 'App\Http\Controllers\JobController@contacted')->name('parent.contacted');
+Route::get('/jobdetail/free/{job_id}','App\Http\Controllers\JobController@contacted')->name('contact.parent');
+
+// Route::get('/joblist/contacted', 'App\Http\Controllers\JobController@contacted')->name('parent.contacted');
 Route::get('/jobdetail/{id}','App\Http\Controllers\JobController@ShowSingleJobByBabysitter')->name('viewjob.detail');
 
 // Route::get('/babysitter/profile', function () {

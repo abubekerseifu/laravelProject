@@ -17,7 +17,9 @@ class JobController extends Controller
      *
      * @return void
      */
-     public function __construct() { }
+     public function __construct() { 
+         
+     }
     // public function __construct()
     // {
     //     $this->middleware('guest');
@@ -92,28 +94,31 @@ class JobController extends Controller
          return view('welcome');
      
     }
-    // protected function contacted(){
-    //             $jobs=DB::table('job')->select('*')->where('job_status', 'public')->where('approved', 'yes')->get();
-    //             $contacted='yes';
-    //             View::share('contacted',$contacted);
-    //             return view('joblist')->with('jobs',$jobs);
-
-    // }
-    protected function alljob(){
-        $jobs=DB::table('job')->select('*')->where('job_status', 'public')->where('approved', 'yes')->get();
+    protected function contacted($job_id){
+        $job = DB::table('job')->select('*')->where('job_id', $job_id)->first();
         $babysitter_payments = DB::table('settings')->pluck('babysitter_make_p');
-    foreach ($babysitter_payments as $babysitter_payment) {
+        foreach ($babysitter_payments as $babysitter_payment) {
        
         if($babysitter_payment=='yes'){
-            $n_payment='yes';
-           
+            $n_payment='yes'; 
         }
         else{
              $n_payment='no';
+              DB::table('payment_job')->insert([
+                'user_id' => request()->user()->id,
+                'job_id' => $job_id,
+                'contacted' => 'yes'
+                ]);
         }
-                View::share('n_payment',$n_payment);
 
     }
+     $contacted=DB::table('payment_job')->select('contacted')->where('job_id', $job_id)->first();
+                View::share('contacted',$contacted);
+                View::share('n_payment',$n_payment);
+    return view('babysitter.viewjobdetailbybabysitter')->with('job',$job);
+}
+    protected function alljob(){
+        $jobs=DB::table('job')->select('*')->where('job_status', 'public')->where('approved', 'yes')->get();
         return view('joblist')->with('jobs',$jobs);
         //orderBy('created_at')->get();
     }
@@ -125,11 +130,38 @@ class JobController extends Controller
         //orderBy('created_at')->get();
     }
     protected function ShowSingleJob($id){
+    $job_id = DB::table('job')->select('job_id')->where('user_id', $id)->first();
     $job = DB::table('job')->select('*')->where('user_id', $id)->first();
+    $jobs=Job::all();
+    foreach($jobs as $j){
+            $contacted =DB::table('payment_job')->select('contacted')->where('job_id', $j->job_id)->first();
+            $u_id =DB::table('payment_job')->select('user_id')->where('job_id', $j->job_id)->first();
+
+    }
+            View::share('contacted',$contacted);
+            foreach($u_id as $uid){
+                $name=DB::table('profile')->select('*')->where('user_id',$uid)->first();
+                View::share('name',$name);
+            }
     return view('parent.jobdetail')->with('job',$job);
 }
-protected function ShowSingleJobByBabysitter($id){
-    $job = DB::table('job')->select('*')->where('job_id', $id)->first();
+protected function ShowSingleJobByBabysitter($job_id){
+    $job = DB::table('job')->select('*')->where('job_id', $job_id)->first();
+    $babysitter_payments = DB::table('settings')->pluck('babysitter_make_p');
+    foreach ($babysitter_payments as $babysitter_payment) {
+       
+        if($babysitter_payment=='yes'){
+            $n_payment='yes';
+           
+        }
+        else{
+             $n_payment='no';
+        }
+                View::share('n_payment',$n_payment);
+                
+    }
+    $contacted=DB::table('payment_job')->select('contacted')->where('job_id', $job_id)->first();
+    View::share('contacted',$contacted);
     return view('babysitter.viewjobdetailbybabysitter')->with('job',$job);
 }
 protected function makeJobPublic($jid){

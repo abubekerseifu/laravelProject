@@ -19,7 +19,11 @@
   </tr>
   <tr>
   <td></td>
-  <td><image src="{{asset('uploads/Profile/'. $profile->image)}}" alt="image" width="100px" height="100px"></td>
+  <td>@if($profile->image)
+      <image src="{{asset('uploads/Profile/'. $profile->image)}}" alt="image" width="100px" height="100px">
+        @else
+        <img src="/uploads/Profile/av.png" alt="image" width="100px" height="100px">
+        @endif
   <td><b>Name : </b>{{$profile->fname}} {{$profile->lname}}<br/><b> Gender : </b>{{$profile->gender}} <br/><b> Birth-Date : </b>{{$profile->birth_date}}</td>
       
       </tr>

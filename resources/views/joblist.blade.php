@@ -29,9 +29,6 @@
     </td>
 
     <td>
-    @if($n_payment=='yes')
-    <a href="{{route('v.babysitter.stripe',$job->job_id)}}" type="button" class="btn btn-warning">contact {{$job->fname}}</a>
-    @endif
     </td>
     </tr>
  @endforeach
