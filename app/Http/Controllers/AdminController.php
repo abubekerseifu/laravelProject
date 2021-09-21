@@ -26,6 +26,10 @@ class AdminController extends Controller
     }
     protected function createUser(Request $request)
     {
+        $this->validate($request,['name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email:rfc,dns', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed']
+        ]);
        DB::transaction(function () use ($request){
         $user=new User();
         $user->name=$request->name;
@@ -41,6 +45,32 @@ class AdminController extends Controller
     }
     protected function postJob(Request $request)
     {
+         $this->validate($request,[
+             'user_id'=>['required'],
+            'fname' => ['required', 'string', 'max:255'],
+            'lname' => ['required', 'string', 'max:255'],
+            'image'=>['image', 'mimes:jpeg,png,jpg,gif,svg|max:2048'],
+            'phnumber' => ['required', 'integer','unique:job'],
+            'address' => ['required', 'string'],
+            'city' => ['required', 'string'],
+            'country' => ['required', 'string'],
+            'gender' => ['required'],
+            'start_date'=>['required','date','after:today'],
+            'num_children' => ['required', 'integer'],
+            'price' => ['required','integer'],
+             'upper_age'=>['required','integer','gte:lower_age'],
+             'lower_age'=>['required','integer','gte:0'],
+            'living_condition' => ['required'],
+            'chores'=>['required'],
+            'weekend_break'=>['required']
+        ], ['start_date.after' => 'start date must be in the future',
+        'fname.required' => 'first name is required','lname.required' => 'last name is required',
+        'phnumber.required' => 'Phone number is required',
+        'num_children.required' => 'number of children is required',
+        'num_children.integer' => 'number of children must be a number',
+        'price.integer' => 'price must be a number',
+        'image.image' => 'selected file is not an image',
+        ]);
          DB::transaction(function () use ($request){
          $job=new Job();
          $job->user_id=$request->user_id;
@@ -86,6 +116,23 @@ class AdminController extends Controller
     }
     protected function postProfile(Request $request)
     {
+         $this->validate($request,[ 'fname' => ['required', 'string', 'max:255'],
+         'user_id'=>['required'],
+        'lname' => ['required', 'string', 'max:255'],
+        'image'=>['image', 'mimes:jpeg,png,jpg,gif,svg|max:2048'],
+        'numbers' => ['required', 'integer','unique:profile'],
+            'address' => ['required', 'string'],
+            'city' => ['required', 'string'],
+            'country' => ['required', 'string'],
+            'gender' => ['required'],
+            'birth_date'=>['required','date','valid_birth_date'],
+            'experience' => ['required', 'integer'],
+            'price' => ['required'],
+            'living_condition' => ['required'],
+        ],
+        ['birth_date.valid_birth_date' => 'You have to be older than 18',
+        'image.image' => 'selected file is not an image',
+        ]);
        DB::transaction(function () use ($request){
        
          $profile=new Profile();

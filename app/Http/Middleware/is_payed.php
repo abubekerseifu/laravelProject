@@ -16,7 +16,7 @@ class is_payed
      */
     public function handle(Request $request, Closure $next)
     {
-        $j = User::find(1)->job;
+        $j =DB::table('payment_job')->select('payment_status')->where('user_id', request()->user()->id)->where('approved', 'yes')->get();
         $p = User::find(1)->profile;
 
         if(Auth::check() && Auth()->user()->role=='Prent' && $j->paymet_status=='paid'){

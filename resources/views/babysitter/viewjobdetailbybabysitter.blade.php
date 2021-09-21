@@ -17,7 +17,11 @@
     <td></td><td></td>
     <td>
     @if($n_payment=='yes')
+    @if($paid=='paid')
+      <a href="{{route('v.parent.contactinfo',$job->job_id)}}" type="button" class="btn btn-warning">Contact {{$job->fname}}</a>
+    @else
     <a href="{{route('v.babysitter.stripe',$job->job_id)}}" type="button" class="btn btn-warning">Contact {{$job->fname}}</a>
+    @endif
   @else
   @if($contacted=='no')
   <a href="{{route('contact.parent',$job->job_id)}}" type="button" class="btn btn-warning">Contact {{$job->fname}}</a>

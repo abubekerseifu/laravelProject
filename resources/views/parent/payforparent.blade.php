@@ -78,8 +78,6 @@
                               <h3 class='control-label' style="color:black;">Expiration Year</h3> 
                               <input class='form-control card-expiry-year' placeholder='YYYY' size='4' type='text'>
                            </div>
-                           
-                           
                         </div>
                        
                       {{-- <div class='form-row row'>

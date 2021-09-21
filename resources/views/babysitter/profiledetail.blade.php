@@ -118,7 +118,12 @@ span{
      margin-right:30%;
      min-height:50%;
 }
+.errors{
+     color: red;
+     font-size:10px;
+}
 </style>
+
 @section('content')
 <div class="conatiner" id="container">
 <div class="jumbotorn">
@@ -176,7 +181,7 @@ span{
 </div>
 </div>
 
-<div class="modal fade" id="myModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade in" id="myModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -212,13 +217,28 @@ span{
 <div>
 <div class="row g-3">
   <div class="col-sm-3">
-    <input name="fname" type="text" class="form-control" value="{{$profile->fname}}" placeholder="First Name" aria-label="firstname">
+    <input name="fname" type="text" class="form-control @error('fname') is-invalid @enderror" value="{{$profile->fname}}" placeholder="First Name" aria-label="firstname">
+                             @error('fname')
+                                    <span class="errors" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
   </div>
   <div class="col-sm-3">
-    <input name="lname" type="text" class="form-control"  value="{{$profile->lname}}" placeholder="Last Name" aria-label="lastname">
+    <input name="lname" type="text" class="form-control  @error('lname') is-invalid @enderror"  value="{{$profile->lname}}" placeholder="Last Name" aria-label="lastname">
+  @error('lname')
+                                    <span class="errors" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
   </div>
   <div class="col-sm-5">
-    <input type="number" name="numbers" class="form-control"  value="{{$profile->numbers}}" placeholder="Phone Number" aria-label="phone">
+    <input type="number" name="numbers" class="form-control  @error('numbers') is-invalid @enderror"  value="{{$profile->numbers}}" placeholder="Phone Number" aria-label="phone">
+  @error('numbers')
+                                    <span class="errors" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
   </div>
   </div>
     <h2 class="required">
@@ -227,14 +247,29 @@ span{
     
                 <div class="row g-3">
                 <div class="col-sm-11">
-                <input name="address" class="form-control" type="text" value="{{$profile->address}}" placeholder="Enter your address"></div>
+                <input name="address" class="form-control  @error('address') is-invalid @enderror" type="text" value="{{$profile->address}}" placeholder="Enter your address"></div>
+                @error('address')
+                                    <span class="errors" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                 </div>
                 <div class="row g-3">
                 <div class="col-sm-4">
-                <input type="text"name="country" class="form-control" value="{{$profile->country}}" placeholder="Country" aria-label="country">
+                <input type="text"name="country" class="form-control  @error('country') is-invalid @enderror" value="{{$profile->country}}" placeholder="Country" aria-label="country">
+                @error('country')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                 </div>
                 <div class="col-sm-7">
-                <input type="text" name="city" class="form-control" value="{{$profile->city}}" placeholder="city" aria-label="city">
+                <input type="text" name="city" class="form-control  @error('city') is-invalid @enderror" value="{{$profile->city}}" placeholder="city" aria-label="city">
+                @error('city')
+                                    <span class="errors" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
   </div>
   </div>
                 
@@ -258,9 +293,14 @@ span{
                             
                             <div class="birthdate">
                                 <div class="input-group">
-                                    <input type="date" class="form-control" id="start" name="birth_date"
+                                    <input type="date" class="form-control @error('birth_date') is-invalid @enderror" id="start" name="birth_date"
                                     value="{{$profile->birth_date}}"
                                     min="1900-01-01" max="2021-1-1">
+                                    @error('birth_date')
+                                    <span class="errors" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                                 </div>
                             </div> </div> </div>
                        </div>
@@ -270,7 +310,7 @@ span{
                 <div class="col-sm-11">
                         <div class="input-group">
                             <select class="form-control" style="font-size:12px;" name="experience">
-                                <option value="0" <?php if($profile->experience== '0') { ?> selected="selected"<?php } ?>>&lt; 1 year</option>
+                                <option value="0" <?php if($profile->experience== '0') { ?> selected="selected"<?php } ?>>No experience</option>
                                 <option value="1"<?php if($profile->experience== '1') { ?> selected="selected"<?php } ?>>1 year</option>
                                                                     <option value="2"<?php if($profile->experience== '2') { ?> selected="selected"<?php } ?>> years</option>
                                                                     <option value="3"<?php if($profile->experience== '3') { ?> selected="selected"<?php } ?>>3 years</option>
@@ -294,9 +334,14 @@ span{
                
                         <div class="input-group">
                          <span class="input-group-text" style="font-size: 12px">$</span>
-                           <input name="price" value="{{$profile->price}}" class="form-control" autocomplete="off" type="text" placeholder="Enter prefered Price">
+                           <input name="price" value="{{$profile->price}}" class="form-control  @error('price') is-invalid @enderror" autocomplete="off" type="text" placeholder="Enter prefered Price">
 
                             <span class="input-group-text" style="font-size: 12px">/child</span>
+                            @error('price')
+                                    <span class="errors" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                         </div></div></div>
                         <h2 class="required">Comfortable with more than one child</h2>
                         <div class="row g-3">
@@ -419,4 +464,11 @@ span{
             </div>
             </div>
 </div></div></div></div>
+@if (count($errors) > 0)
+    <script type="text/javascript">
+        $( document ).ready(function() {
+             $('#myModal').modal('show');
+        });
+    </script>
+  @endif
 @endsection

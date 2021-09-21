@@ -7,6 +7,8 @@ use App\Models\Job;
 use App\Models\User;
 use DB;
 use View;
+use Stripe;
+use Session;
 // use App\Http\Controllers\Log;
 class JobController extends Controller
 {
@@ -31,28 +33,32 @@ class JobController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function validator(array $data)
+    protected function store(Request $request)
     {
-        return Validator::make($data, [
+        $this->validate($request,[
             'fname' => ['required', 'string', 'max:255'],
             'lname' => ['required', 'string', 'max:255'],
-            'numbers' => ['required', 'integer','unique:profile'],
+            'image'=>['image', 'mimes:jpeg,png,jpg,gif,svg|max:2048'],
+            'phnumber' => ['required', 'integer','unique:job'],
             'address' => ['required', 'string'],
             'city' => ['required', 'string'],
             'country' => ['required', 'string'],
             'gender' => ['required'],
-            'start_date'=>['required'],
+            'start_date'=>['required','date','after:today'],
             'num_children' => ['required', 'integer'],
-            'price' => ['required'],
-             'upper_age'=>['required','integer'],
-             'lower_age'=>['required','integer'],
+            'price' => ['required','integer'],
+             'upper_age'=>['required','integer','gt:lower_age'],
+             'lower_age'=>['required','integer','gte:0'],
             'living_condition' => ['required'],
             'chores'=>['required'],
-            'weekend_break'=>['required'],
+            'weekend_break'=>['required']
+        ], ['start_date.after' => 'start date must be in the future',
+        'fname.required' => 'first name is required','lname.required' => 'last name is required',
+        'phnumber.required' => 'Phone number is required',
+        'num_children.required' => 'number of children is required',
+        'num_children.integer' => 'number of children must be a number',
+        'price.integer' => 'price must be a number',
         ]);
-    }
-    protected function store(Request $request)
-    {
         DB::transaction(function () use ($request){
         DB::table('users')
         ->where('id', request()->user()->id)
@@ -118,7 +124,17 @@ class JobController extends Controller
     return view('babysitter.viewjobdetailbybabysitter')->with('job',$job);
 }
     protected function alljob(){
+        $alwayss = DB::table('settings')->pluck('always_approve');
+        foreach ($alwayss as $always) {
+       
+        if($always=='yes'){
         $jobs=DB::table('job')->select('*')->where('job_status', 'public')->where('approved', 'yes')->get();
+        }
+        else{
+             $jobs=Job::all();
+           
+        }
+        }
         return view('joblist')->with('jobs',$jobs);
         //orderBy('created_at')->get();
     }
@@ -139,29 +155,46 @@ class JobController extends Controller
 
     }
             View::share('contacted',$contacted);
+            if($contacted){
             foreach($u_id as $uid){
                 $name=DB::table('profile')->select('*')->where('user_id',$uid)->first();
                 View::share('name',$name);
-            }
+    }}
     return view('parent.jobdetail')->with('job',$job);
 }
-protected function ShowSingleJobByBabysitter($job_id){
+protected function ShowSingleJobByBabysitter($job_id,Request $request){
     $job = DB::table('job')->select('*')->where('job_id', $job_id)->first();
     $babysitter_payments = DB::table('settings')->pluck('babysitter_make_p');
+    $n_payment='';
     foreach ($babysitter_payments as $babysitter_payment) {
        
         if($babysitter_payment=='yes'){
             $n_payment='yes';
            
+           
         }
         else{
              $n_payment='no';
+             $contacted=DB::table('payment_job')->select('contacted')->where('job_id', $job_id)->first();
+             View::share('contacted',$contacted);
         }
                 View::share('n_payment',$n_payment);
+            
+    }
+            if($n_payment=='yes'){
+            $out = new \Symfony\Component\Console\Output\ConsoleOutput();
+            $count=DB::table('users')->select('count')->where('id', request()->user()->id)->first();
+            if($count->count >= 1 and $count->count!=4){
+            $paid='paid';
+            }
+            else{
+                $paid='';
+            }
+            View::share('paid',$paid);
+            //$count=DB::table('users')->select('count')->where('id', request()->user()->id)->first();
                 
     }
-    $contacted=DB::table('payment_job')->select('contacted')->where('job_id', $job_id)->first();
-    View::share('contacted',$contacted);
+    
     return view('babysitter.viewjobdetailbybabysitter')->with('job',$job);
 }
 protected function makeJobPublic($jid){
@@ -184,6 +217,31 @@ protected function deleteJob(Request $request,$id){
     return view('welcome');
 }
 protected function updateJob(Request $request,$job_id){
+    $this->validate($request,[
+            'fname' => ['required', 'string', 'max:255'],
+            'lname' => ['required', 'string', 'max:255'],
+            'image'=>['image', 'mimes:jpeg,png,jpg,gif,svg|max:2048'],
+            'phnumber' => ['required', 'integer',\Illuminate\Validation\Rule::unique('job','phnumber')->ignore($job_id, 'job_id')],
+            'address' => ['required', 'string'],
+            'city' => ['required', 'string'],
+            'country' => ['required', 'string'],
+            'gender' => ['required'],
+            'start_date'=>['required','date','after:today'],
+            'num_children' => ['required', 'integer'],
+            'price' => ['required','integer'],
+             'upper_age'=>['required','integer','gt:lower_age'],
+             'lower_age'=>['required','integer','gte:0'],
+            'living_condition' => ['required'],
+            'chores'=>['required'],
+            'weekend_break'=>['required']
+        ], ['start_date.after' => 'start date must be in the future',
+        'fname.required' => 'first name is required','lname.required' => 'last name is required',
+        'phnumber.required' => 'Phone number is required',
+        'num_children.required' => 'number of children is required',
+        'num_children.integer' => 'number of children must be a number',
+        'price.integer' => 'price must be a number',
+        'image.image' => 'selected file is not an image',
+        ]);
         $job = Job::find($job_id);
        $job->fname= $request->fname;
          $job->lname= $request->lname;
@@ -213,7 +271,7 @@ protected function updateJob(Request $request,$job_id){
              $job->image=$filename;
          }
          
-         $job->save();
+    $job->save();
     $job = DB::table('job')->select('*')->where('job_id', $job_id)->first();
     return redirect()->back();
 }
@@ -225,9 +283,42 @@ protected function updateJob(Request $request,$job_id){
     }
     public function viewParentContact(Request $request,$job_id)
     {
+            $count=DB::table('users')->select('count')->where('id', request()->user()->id)->first();
+            if($count->count >= 1){
+                DB::table('payment_job')->insert([
+                'user_id' => request()->user()->id,
+                'job_id' => $job_id,
+                'paymet_status' => 'paid'
+                ]);
+                $query=DB::table('users')->where('id', request()->user()->id);
+                $query->decrement('count');
+            }
+         $pay=DB::table('payment_job')->select('job_id')->where('user_id', request()->user()->id)->first();
+         foreach ($pay as $p) {
+             $query=DB::table('users')->where('id', request()->user()->id);
+             $query->increment('count');
+            }
+        //  }
+        //  $j_id=DB::table('payment_job')->select('job_id')->where('user_id', request()->user()->id)->first();
+        //  $count=DB::table('users')->select('count')->where('id', request()->user()->id)->first();
+        //  if($j_id->job_id==$job_id and $count->count!=3){
+        //  $query=DB::table('users')->where('id', request()->user()->id);
+        //  $query->increment('count');
+        //  }
+        //  if($j_id->job_id==$job_id and $count->count==4){
+        //      $query=DB::table('users')->where('id', request()->user()->id);
+        //      $query->decrement('count');
+        //  }
+         $c=DB::table('users')->select('count')->where('id', request()->user()->id)->first();
+          if($c->count < 1){
+               $user = User::find(request()->user()->id);
+               $user->count = 4;
+               $user->save();
+          }
+        
         $job = DB::table('job')->select('*')->where('job_id', $job_id)->first();
         View::share('job',$job);
-        return view('parent.bcontactinfo');
+        return view('parent.pcontactinfo');
     }
     
     public function makePay(Request $request,$job_id)
@@ -241,11 +332,6 @@ protected function updateJob(Request $request,$job_id){
                 "source" => $request->stripeToken,
                 "description" => "This payment is for testing purpose from habeshababysitters.com"
         ]);
-            DB::table('payment_job')->insert([
-                'user_id' => request()->user()->id,
-                'job_id' => $job_id,
-                'paymet_status' => 'paid'
-                ]);
         Session::flash('success', 'Payment successful!');
         return redirect()->route('v.parent.contactinfo',['job_id'=>$job_id]);
     }

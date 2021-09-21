@@ -57,7 +57,6 @@ Route::get('/joblist', 'App\Http\Controllers\JobController@alljob');
 Route::get('/jobdetail/free/{job_id}','App\Http\Controllers\JobController@contacted')->name('contact.parent');
 
 // Route::get('/joblist/contacted', 'App\Http\Controllers\JobController@contacted')->name('parent.contacted');
-Route::get('/jobdetail/{id}','App\Http\Controllers\JobController@ShowSingleJobByBabysitter')->name('viewjob.detail');
 
 // Route::get('/babysitter/profile', function () {
 //     return view('babysitter.profile');
@@ -115,6 +114,8 @@ Route::group(['prefix' => 'babysitter', 'middleware'=>['auth','is_babysitter','p
     Route::get('/contactinfo/{job_id}','App\Http\Controllers\JobController@viewParentContact')->name('v.parent.contactinfo');
     Route::get('/makepayment/{job_id}', 'App\Http\Controllers\JobController@viewPaymenttForm')->name('v.babysitter.stripe');
     Route::post('/makepayment/{job_id}', 'App\Http\Controllers\JobController@makePay')->name('stripe.babysitter.post');
+    Route::get('/jobdetail/{id}','App\Http\Controllers\JobController@ShowSingleJobByBabysitter')->name('viewjob.detail');
+
 });
 
 Route::group(['prefix' => 'parent', 'middleware'=>['auth','is_parent','preventBackHistory']], function () {

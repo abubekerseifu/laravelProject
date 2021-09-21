@@ -48,10 +48,9 @@ margin-top:-22px;
     background-color:#563d7c;
     color:#fcec5d;
     border-radius:none;
-    padding:1.5rem 2rem;
-    font-size:1rem;
+   
+    font-size:2rem;
     margin-right:15px;
-    font-size:12px;
 }
 .slider-btn .btn:hover{
     background-color:#fff;
@@ -63,37 +62,33 @@ margin-top:-22px;
      
 .carousel-caption h1{
         font-size:18px;
-        margin-left:-150px;
+        margin-left:-80px;
         
+}
+.container h2{
+    display: inline-block;
+          margin-left:-250px;
+         overflow: hidden; white-space: nowrap;
+}
+.carousel-caption p{
+         display: inline-block;
+          margin-left:-100px;
+          white-space: nowrap;
+}
+.slider-btn .btn-1{
+    margin-right:-100%;
 }
 .slider-btn{
     margin-top:10px;
 }
 .slider-btn .btn{
     padding:1rem 1rem;
-    font-size:1rem;
+    font-size:1.5rem;
     margin-top:15px;
+    margin-left:-100px;
 }
 }
-     @media only screen and (max-width:360px){
-        .carousel-caption h1{
-        font-size:10px;
-        margin-left:-120px;
-        font-size:25px;
-}
-.slider-btn{
-    margin-left:-70px;
-}
-.slider-btn .btn-1{
-    margin-left:20px;
-}
-.carousel-caption p{
-        font-size:12px;
-        top:1rem;
-        display:block;
-        
-}
-     }
+     
 #container{
 font-size:25px;
 color:black;
@@ -145,7 +140,7 @@ margin-top:50px;
     <h1>Habeshababysitters</h1>
     <p>Great Babysitter in your area!</p>
     <div class="slider-btn">
-     <a href="{{ url('babysitterlist') }}" class="btn btn-1">Babysitters to hire</a>
+     <a href="{{ route('babysitters.list')}}" class="btn btn-1">Babysitters to hire</a>
      <a href="{{ url('joblist') }}" class="btn btn-2">Babysitting jobs to be hired</a>
     </div>
   </div>
@@ -158,7 +153,7 @@ margin-top:50px;
     
     <p>Great Babysitter in your area!</p>
    <div class="slider-btn">
-     <a href="{{ url('babysitterlist') }}" class="btn btn-1">Babysitters to hire</a>
+     <a href="{{ route('babysitters.list')}}" class="btn btn-1">Babysitters to hire</a>
      <a href="{{ url('joblist') }}" class="btn btn-2">Babysitting jobs to be hired</a>
     </div>
     </div>
@@ -172,7 +167,7 @@ margin-top:50px;
    
     <p>Great Babysitter in your area!</p>
     <div class="slider-btn">
-     <a href="{{ url('babysitterlist') }}" class="btn btn-1">Babysitters to hire</a>
+     <a href="{{ route('babysitters.list')}}" class="btn btn-1">Babysitters to hire</a>
      <a href="{{ url('joblist') }}" class="btn btn-2">Babysitting jobs to be hired</a>
     </div>
     </div>

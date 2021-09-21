@@ -41,7 +41,7 @@
                         </table>
                     </div>
                 </div>
-    <div class="modal fade" id="newUserModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal fade in" id="newUserModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -51,7 +51,6 @@
       <div class="modal-body">
      <form method="POST" action="{{ route('r.user') }}" enctype="multipart/form-data">
                         @csrf
-
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
 
@@ -121,4 +120,11 @@
 </div>
                         </div></div>
                         </div>
+@if (count($errors) > 0)
+    <script type="text/javascript">
+        $( document ).ready(function() {
+             $('#newUserModal').modal('show');
+        });
+    </script>
+  @endif
 @endsection

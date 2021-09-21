@@ -111,6 +111,14 @@ span{
     content:" *";
     color: red;
   }
+.r{
+    font-size:15px;
+    color: #dc3545;
+}
+.errors{
+     color: red;
+     font-size:13px;
+}
 form h2{
     
   }
@@ -180,17 +188,21 @@ form h2{
                        <div class="row g-3">
                 <div class="col-sm-11">
                         <div class="input-group">
-                            <select class="form-control" style="font-size:20px;" id="users" name="user_id" data-validation="empty" data-error="Select user">
+                            <select class="form-control @error('user_id') is-invalid @enderror" style="font-size:20px;" id="users" name="user_id" data-validation="empty" data-error="Select user">
                                 <option value="" checked>Select Babysitter</option>
                                 @foreach($babysitters as $babysitter)
                                 <option value="{{$babysitter->id}}">{{$babysitter->name}}</option>
                                 @endforeach
                             </select>
-                            
+                            @error('user_id')
+                                    <span class="errors" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror  
                         </div></div></div>
                         <div class="row justify-content-center" id="image_c">
 
-        <div class="wrapper"><input name="image" accept="image/*" type="file" class="my_file" id="file"onchange="document.getElementById('i').src = window.URL.createObjectURL(this.files[0])">
+        <div class="wrapper"><input name="image" accept="image/*" type="file" class="my_file @error('image') is-invalid @enderror" id="file"onchange="document.getElementById('i').src = window.URL.createObjectURL(this.files[0])">
         
         <img src="/uploads/Profile/av.png" id="i"></div>
        
@@ -198,7 +210,12 @@ form h2{
 </div>
 </div>     
                     <div class="mb-5 pb-5 border-bottom">
-
+<div class="container">
+  @error('image')
+                                    <span class="r" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror  </div>
                         <h2 class="required">About me</h2>
 
 
@@ -207,13 +224,28 @@ form h2{
 <div>
 <div class="row g-3">
   <div class="col-sm-3">
-    <input name="fname" type="text" class="form-control" placeholder="First Name" aria-label="firstname">
+    <input name="fname"  value="{{old('fname')}}" type="text" class="form-control @error('fname') is-invalid @enderror" placeholder="First Name" aria-label="firstname">
+     @error('fname')
+                                    <span class="errors" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror 
   </div>
   <div class="col-sm-3">
-    <input name="lname" type="text" class="form-control" placeholder="Last Name" aria-label="lastname">
+    <input name="lname"  value="{{old('lname')}}" type="text" class="form-control @error('lname') is-invalid @enderror" placeholder="Last Name" aria-label="lastname">
+     @error('lname')
+                                    <span class="errors" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror 
   </div>
   <div class="col-sm-5">
-    <input type="number" name="numbers" class="form-control" placeholder="Phone Number" aria-label="phone">
+    <input type="number"  value="{{old('numbers')}}" name="numbers" class="form-control @error('number') is-invalid @enderror" placeholder="Phone Number" aria-label="phone">
+     @error('numbers')
+                                    <span class="errors" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror 
   </div>
   </div>
     <h2 class="required">
@@ -222,14 +254,29 @@ form h2{
     
                 <div class="row g-3">
                 <div class="col-sm-11">
-                <input name="address" class="form-control" type="text"  placeholder="Enter your address"></div>
+                <input name="address"  value="{{old('address')}}" class="form-control @error('address') is-invalid @enderror" type="text"  placeholder="Enter your address"></div>
+                 @error('address')
+                                    <span class="errors" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror 
                 </div>
                 <div class="row g-3">
                 <div class="col-sm-4">
-                <input type="text"name="country" class="form-control" placeholder="Country" aria-label="country">
+                <input type="text"  value="{{old('country')}}" name="country" class="form-control @error('country') is-invalid @enderror" placeholder="Country" aria-label="country">
+                 @error('country')
+                                    <span class="errors" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror 
                 </div>
                 <div class="col-sm-7">
-                <input type="text" name="city" class="form-control"  placeholder="city" aria-label="city">
+                <input type="text"  value="{{old('city')}}" name="city" class="form-control @error('city') is-invalid @enderror"  placeholder="city" aria-label="city">
+                 @error('city')
+                                    <span class="errors" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror 
   </div>
   </div>
                 
@@ -253,10 +300,15 @@ form h2{
                             
                             <div class="birthdate">
                                 <div class="input-group">
-                                    <input type="date" class="form-control" id="start" name="birth_date"
+                                    <input type="date"  value="{{old('birth_date')}}" class="form-control @error('birth_date') is-invalid @enderror" id="start" name="birth_date"
                                     min="1900-01-01" max="2021-1-1">
                                 </div>
-                            </div> </div> </div>
+                            </div> 
+                             @error('birth_date')
+                                    <span class="errors" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror </div> </div>
                        </div>
                          <h2 class="required">Experience</h2>
                          <div class="mb-5 pb-5 border-bottom">
@@ -286,10 +338,16 @@ form h2{
                 <div class="col-sm-11">
 <div class="input-group">
                          <span class="input-group-text" style="font-size: 12px">$</span>
-                           <input name="price" class="form-control" autocomplete="off" type="text" placeholder="Enter prefered Price">
+                           <input name="price"  value="{{old('price')}}" class="form-control @error('price') is-invalid @enderror" autocomplete="off" type="text" placeholder="Enter prefered Price">
 
                             <span class="input-group-text" style="font-size: 12px">/child</span>
-                        </div></div></div>
+                        </div></div>
+                         @error('price')
+                                    <span class="errors" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror 
+                        </div>
                         <h2 class="required">Comfortable with more than one child</h2>
                         <div class="row g-3">
                 <div class="col-sm-2">
@@ -310,11 +368,16 @@ form h2{
 <h2 class="required">Living Condition</h2>
                                                  <div class="row g-3">
                 <div class="col-sm-11">
-                            <select class="form-control" style="font-size:20px;" id="living" name="living_condition">
+                            <select class="form-control @error('living_condition') is-invalid @enderror" style="font-size:20px;" id="living" name="living_condition">
                                 <option value="back_forth">Back and Forth</option>
                                 <option value="live_in">Live In</option>
                                 <option value="" checked>Choose living preference</option>
                             </select>
+                             @error('living_condition')
+                                    <span class="errors" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror 
                         </div></div></div>
                         <h2 class="required">Break For Weekend</h2>
                            <div class="row g-3">
@@ -356,31 +419,49 @@ form h2{
                 <div  class="col-sm-5">
                 <div class="input-group">
                 <span class="input-group-text" style="font-size: 12px">Facebook</span>
-                <input class="form-control" name="facebook" type="text" placeholder="Facebook username">
-    
+                <input  value="{{old('facebook')}}" class="form-control @error('facebook') is-invalid @enderror" name="facebook" type="text" placeholder="Facebook username">
+                 @error('facebook')
+                                    <span class="errors" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror 
             </div></div>
             <div  class="col-sm-6">
                 <div class="input-group">
                 <span class="input-group-text" style="font-size: 12px">Telegram</span>
-               <input class="form-control" name="telegram" type="text" placeholder="Telegram UserName or Number">
-               
+               <input  value="{{old('telegram')}}" class="form-control @error('telegram') is-invalid @enderror" name="telegram" type="text" placeholder="Telegram UserName or Number">
+                @error('telegram')
+                                    <span class="errors" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror 
             </div></div></div>
              <div class="row g-3">
             <div  class="col-sm-5">
                 <div class="input-group">
                 <span class="input-group-text" style="font-size: 12px">WhatsUp</span>
-                <input class="form-control" name="whatsup" type="text" placeholder="WhatsUp Number">
+                <input  value="{{old('whatsup')}}" class="form-control @error('whatsup') is-invalid @enderror" name="whatsup" type="text" placeholder="WhatsUp Number">
+                 @error('whatsup')
+                                    <span class="errors" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror 
             </div></div>
             <div  class="col-sm-6">
                 <div class="input-group">
                 <span class="input-group-text" style="font-size: 12px">Viber</span>
-                <input class="form-control" name="viber" type="text" placeholder="Viber Number">
+                <input  value="{{old('viber')}}" class="form-control @error('viber') is-invalid @enderror" name="viber" type="text" placeholder="Viber Number">
+                 @error('viber')
+                                    <span class="errors" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror 
             </div></div></div>
             <h2>Description</h2>
                  <div class="row g-3">
                 <div  class="col-sm-11">
                 <div class="input-group">
-            <textarea rows = "5" cols = "116" type="text" maxlength = "100" style="font-size:20px" name ="description" placeholder="Provide description here to increase the chance of selectivity..."></textarea></div>
+            <textarea rows = "5"  value="{{old('description')}}" cols = "116" type="text" maxlength = "100" style="font-size:20px" name ="description" placeholder="Provide description here to increase the chance of selectivity..."></textarea></div>
                                               <div class="save">
                                               
     <button type="submit" class="btn btn-info btn-lg w-100" style="font-size : 15px;color:#fff; height: 30px;">
@@ -389,15 +470,12 @@ form h2{
 </div>
                                       <div class="save">
                                               
-    <button type="submit" class="btn btn-info btn-lg w-100" data-dismiss="modal" aria-label="Close" style="font-size : 15px;color:#fff; height: 30px;">
+    <button type="submit" id="b" class="btn btn-info btn-lg w-100" data-dismiss="modal" aria-label="Close" style="font-size : 15px;color:#fff; height: 30px;">
         Close
     </button>
 </div>
             </div>
             </div>
-      
-
-
                    <input type="hidden" name="_csrf_token" value="39d3ef52.h5djrZI1dYxxlFnFmd6KQya06JE6XNmu0xuui9lqMU8.xOU0mdZ-HvUI5S_3rrTPKWmZset9EODbvlP_8bEzcnvJ0TL-wFIUyDz-YQ">
                     <input type="text" class="d-none" name="spamvalidation">
                     
@@ -409,4 +487,12 @@ form h2{
             </div>
             </div>
 </div></div></div></div>
+@if (count($errors) > 0)
+    <script type="text/javascript">
+        $( document ).ready(function() {
+             $('#postProfileModal').modal('show');
+        });
+        
+    </script>
+  @endif
 @endsection

@@ -121,6 +121,14 @@ span{
      margin-right:30%;
      min-height:50%;
 }
+.r{
+    font-size:15px;
+    color: #dc3545;
+}
+.errors{
+     color: red;
+     font-size:13px;
+}
 </style>
 @section('content')
 <div class="conatiner" id="container">
@@ -174,20 +182,21 @@ span{
     </tr>
     <tr><td></td><td></td>
     <td><b>Description : </b>{{$job->description}}</br>
+    @if($contacted)
     @foreach($contacted as $c)
-    @if($c)
     
     Contacted : by {{$name->fname}}     <a href="{{route('viewbabysitter.detail',$name->profile_id)}}" class="btn btn-primary">View Detail</a>
 </br>
 
-    @endif
+   
     @endforeach
+     @endif
     </td></tr>
   </tbody>
 </table>
 </div>
 </div>
-<div class="modal fade" id="myModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade in" id="myModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -204,7 +213,7 @@ span{
                     <div class="mb-5 pb-5 border-bottom">
                         <div class="row justify-content-center" id="image_c">
 
-        <div class="wrapper"><input type="file" name="image" class="my_file" id="file"onchange="document.getElementById('i').src = window.URL.createObjectURL(this.files[0])">
+        <div class="wrapper"><input type="file" name="image" accept="image/*" class="my_file @error('image') is-invalid @enderror" id="file"onchange="document.getElementById('i').src = window.URL.createObjectURL(this.files[0])">
         @if($job->image)
         <img src="{{asset('uploads/ParentImage/'. $job->image)}}" id="i"></div>
         @else
@@ -214,19 +223,39 @@ span{
 </div>
 </div>     
 <div class="mb-5 pb-5 border-bottom">
-
+ <div class="container">
+  @error('image')
+                                    <span class="r" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror  </div>
   <h2>Provide your details</h2>
                                      
 
 <div class="row g-3">
   <div class="col-sm-3">
-    <input type="text" name="fname" value="{{$job->fname}}" class="form-control" placeholder="Your First Name" aria-label="firstname">
+    <input type="text" name="fname" value="{{$job->fname}}" class="form-control @error('fname') is-invalid @enderror" placeholder="Your First Name" aria-label="firstname">
+    @error('fname')
+                                    <span class="errors" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                     </span>
+                                @enderror
   </div>
   <div class="col-sm-3">
-    <input type="text" name="lname" value="{{$job->lname}}" class="form-control" placeholder="Your Last Name" aria-label="lastname">
+    <input type="text" name="lname" value="{{$job->lname}}" class="form-control @error('lname') is-invalid @enderror" placeholder="Your Last Name" aria-label="lastname">
+  @error('lname')
+                                    <span class="errors" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                     </span>
+                                @enderror
   </div>
   <div class="col-sm-5">
-    <input type="text" name="phnumber" value="{{$job->phnumber}}" class="form-control" placeholder="Your Phone Number" aria-label="phone">
+    <input type="text" name="phnumber" value="{{$job->phnumber}}" class="form-control @error('phnumber') is-invalid @enderror" placeholder="Your Phone Number" aria-label="phone">
+    @error('phnumber')
+                                    <span class="errors" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                     </span>
+                                @enderror
   </div>
   </div>
     <h2 class="required">
@@ -235,14 +264,30 @@ span{
     
                 <div class="row g-3">
                 <div class="col-sm-11">
-                <input class="form-control" name="address" value="{{$job->address}}" type="text" placeholder="Enter your address"></div>
+                <input class="form-control @error('address') is-invalid @enderror" name="address" value="{{$job->address}}" type="text" placeholder="Enter your address">
+                @error('address')
+                                    <span class="r" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                     </span>
+                                @enderror
+                </div>
                 </div>
                 <div class="row g-3">
                 <div class="col-sm-4">
-                <input type="text" name="country" class="form-control" value="{{$job->country}}" placeholder="Country" aria-label="country">
+                <input type="text" name="country" class="form-control @error('country') is-invalid @enderror" value="{{$job->country}}" placeholder="Country" aria-label="country">
+                @error('country')
+                                    <span class="errors" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                     </span>
+                                @enderror
                 </div>
                 <div class="col-sm-7">
-                <input type="text" name="city" class="form-control" value="{{$job->city}}" placeholder="city" aria-label="city">
+                <input type="text" name="city" class="form-control @error('city') is-invalid @enderror" value="{{$job->city}}" placeholder="city" aria-label="city">
+                @error('city')
+                                    <span class="errors" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                     </span>
+                                @enderror
   </div>
   </div>
    <h2 class="required">
@@ -250,18 +295,33 @@ span{
     </h2>
       <div class="row g-3">
   <div class="col-sm-11">
-    <input type="text" name="num_children" value="{{$job->num_children}}" class="form-control" placeholder="Number of children" aria-label="n-children">
-  </div></div> 
+    <input type="text" name="num_children" value="{{$job->num_children}}" class="form-control @error('num_children') is-invalid @enderror" placeholder="Number of children" aria-label="n-children">
+ @error('num_children')
+                                    <span class="errors" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                     </span>
+                                @enderror
+ </div></div> 
   
   <h2 class="required">
        Children Age Range
     </h2>
     <div class="row g-3">
   <div class="col-sm-4">
-    <input type="text" class="form-control" name="lower_age" value="{{$job->lower_age}}" placeholder="From -  " aria-label="n-children">
+    <input type="text" class="form-control @error('lower_age') is-invalid @enderror" name="lower_age" value="{{$job->lower_age}}" placeholder="From -  " aria-label="n-children">
+    @error('lower_age')
+                                    <span class="errors" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                     </span>
+                                @enderror
     <span style="font-size:10px;">For 1 child specify '0' here </span></div>
     <div class="col-sm-7">
-    <input type="text" class="form-control" name="upper_age" value="{{$job->upper_age}}" placeholder="to - " aria-label="n-children">
+    <input type="text" class="form-control @error('image') is-invalid @enderror" name="upper_age" value="{{$job->upper_age}}" placeholder="to - " aria-label="n-children">
+    @error('upper_age')
+                                    <span class="errors" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                     </span>
+                                @enderror
   </div>  </div></div>
 <div class="mb-5 pb-5 border-bottom">
 
@@ -283,11 +343,16 @@ span{
 <h2 class="required">Living Condition</h2>
                                                  <div class="row g-3">
                 <div class="col-sm-11">
-                            <select class="form-control" style="font-size:12px;" id="living" name="living_condition">
+                            <select class="form-control @error('living_condition') is-invalid @enderror" style="font-size:12px;" id="living" name="living_condition">
                                  <option value="back_forth" <?php if($job->living_condition== 'back_forth') { ?> selected="selected"<?php } ?>>Back and Forth</option>
                                 <option value="live_in" <?php if($job->living_condition== 'live_in') { ?> selected="selected"<?php } ?>>Live In</option>
                                 <option value="" <?php if($job->living_condition== '') { ?> selected="selected"<?php } ?>>Choose living preference</option>
                             </select>
+                            @error('living_condition')
+                                    <span class="errors" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                     </span>
+                                @enderror
                         </div></div></div>
                         <div class="mb-5 pb-5 border-bottom">
                            <h2 class="required">Break For Weekend</h2>
@@ -334,9 +399,14 @@ span{
                
                         <div class="input-group">
                          <span class="input-group-text" style="font-size: 12px">$</span>
-                           <input name="price" class="form-control" value="{{$job->price}}" type="text" placeholder="Enter prefered Price">
+                           <input name="price" class="form-control @error('price') is-invalid @enderror" value="{{$job->price}}" type="text" placeholder="Enter prefered Price">
 
                             <span class="input-group-text" style="font-size: 12px">/child</span>
+                            @error('price')
+                                    <span class="errors" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                     </span>
+                                @enderror
                         </div></div></div>  
 <h2 class="required">Specify Starting Date</h2>
      <div class="row g-3">
@@ -348,8 +418,13 @@ span{
                                 <div class="input-group">
     <script>
     </script>
-    <input type="date" id="start" class="form-control" name="start_date" value="{{$job->start_date}}"
+    <input type="date" id="start" class="form-control @error('start_date') is-invalid @enderror" name="start_date" value="{{$job->start_date}}"
                                   max="2050-1-1">
+                                  @error('start_date')
+                                    <span class="errors" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                     </span>
+                                @enderror
                             
   </div></div> </div>  </div> </div>                                                       
                                                               <h2>Social Media Contact</h2>
@@ -357,25 +432,44 @@ span{
                 <div  class="col-sm-5">
                 <div class="input-group">
                 <span class="input-group-text" style="font-size: 12px">Facebook</span>
-                <input class="form-control" name="facebook" type="text" value="{{$job->facebook}}" placeholder="Facebook username">
+                <input class="form-control @error('facebook') is-invalid @enderror" name="facebook" type="text" value="{{$job->facebook}}" placeholder="Facebook username">
+                @error('facebook')
+                                    <span class="errors" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                     </span>
+                                @enderror
     
             </div></div>
             <div  class="col-sm-6">
                 <div class="input-group">
                 <span class="input-group-text" style="font-size: 12px">Telegram</span>
-               <input class="form-control" name="telegram" type="text" value="{{$job->telegram}}" placeholder="Telegram UserName or Number">
-               
+               <input class="form-control @error('telegram') is-invalid @enderror" name="telegram" type="text" value="{{$job->telegram}}" placeholder="Telegram UserName or Number">
+               @error('telegram')
+                                    <span class="errors" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                     </span>
+                                @enderror
             </div></div></div>
              <div class="row g-3">
             <div  class="col-sm-5">
                 <div class="input-group">
                 <span class="input-group-text" style="font-size: 12px">WhatsUp</span>
-                <input class="form-control" name="whatsup" type="text" value="{{$job->whatsup}}" placeholder="WhatsUp Number">
+                <input class="form-control @error('whatsup') is-invalid @enderror" name="whatsup" type="text" value="{{$job->whatsup}}" placeholder="WhatsUp Number">
+                @error('whatsup')
+                                    <span class="errors" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                     </span>
+                                @enderror
             </div></div>
             <div  class="col-sm-6">
                 <div class="input-group">
                 <span class="input-group-text" style="font-size: 12px">Viber</span>
-                <input class="form-control" name="viber" type="text" value="{{$job->viber}}" placeholder="Viber Number">
+                <input class="form-control @error('viber') is-invalid @enderror" name="viber" type="text" value="{{$job->viber}}" placeholder="Viber Number">
+                @error('viber')
+                                    <span class="errors" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                     </span>
+                                @enderror
             </div></div></div>
             <h2>Description</h2>
                  <div class="row g-3">
@@ -409,4 +503,12 @@ span{
 </div></div>
             </div>
 </div></div>
+@if (count($errors) > 0)
+    <script type="text/javascript">
+        $( document ).ready(function() {
+             $('#myModal').modal('show');
+        });
+    </script>
+  @endif
+
 @endsection

@@ -111,6 +111,14 @@ span{
     content:" *";
     color: red;
   }
+.r{
+    font-size:15px;
+    color: #dc3545;
+}
+.errors{
+     color: red;
+     font-size:13px;
+}
 form h2{
     
   }
@@ -179,17 +187,21 @@ form h2{
                        <div class="row g-3">
                 <div class="col-sm-11">
                         <div class="input-group">
-                            <select class="form-control" style="font-size:20px;" id="gender" name="user_id" data-validation="empty" data-error="Select gender">
+                            <select class="form-control @error('user_id') is-invalid @enderror" style="font-size:20px;" id="gender" name="user_id" data-validation="empty" data-error="Select gender">
                                 <option value="" checked>Select Parent</option>
                                 @foreach($parents as $parent)
                                 <option value="{{$parent->id}}">{{$parent->name}}</option>
                                 @endforeach
                             </select>
-                            
+                             @error('user_id')
+                                    <span class="errors" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror  
                         </div></div></div>
                         <div class="row justify-content-center" id="image_c">
 
-        <div class="wrapper"><input type="file" name="image" class="my_file" id="file"onchange="document.getElementById('i').src = window.URL.createObjectURL(this.files[0])">
+        <div class="wrapper"><input type="file" name="image" accept="image/*" class="my_file  @error('user_id') is-invalid @enderror" id="file"onchange="document.getElementById('i').src = window.URL.createObjectURL(this.files[0])">
         
         <img src="/uploads/Profile/av.png" id="i"></div>
        
@@ -197,19 +209,39 @@ form h2{
 </div>
 </div>     
 <div class="mb-5 pb-5 border-bottom">
-
+ <div class="container">
+  @error('image')
+                                    <span class="r" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror  </div>
   <h2>Provide your details</h2>
                                      
 
 <div class="row g-3">
   <div class="col-sm-3">
-    <input type="text" name="fname" class="form-control" placeholder="Your First Name" aria-label="firstname">
+    <input type="text" value="{{old('fname')}}" name="fname" class="form-control  @error('fname') is-invalid @enderror" placeholder="Your First Name" aria-label="firstname">
+     @error('fname')
+                                    <span class="errors" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror  
   </div>
   <div class="col-sm-3">
-    <input type="text" name="lname" class="form-control" placeholder="Your Last Name" aria-label="lastname">
+    <input type="text" value="{{old('lname')}}" name="lname" class="form-control  @error('lname') is-invalid @enderror" placeholder="Your Last Name" aria-label="lastname">
+     @error('lname')
+                                    <span class="errors" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror  
   </div>
   <div class="col-sm-5">
-    <input type="text" name="phnumber" class="form-control" placeholder="Your Phone Number" aria-label="phone">
+    <input type="text" value="{{old('phnumber')}}" name="phnumber" class="form-control  @error('phnumber') is-invalid @enderror" placeholder="Your Phone Number" aria-label="phone">
+     @error('phnumber')
+                                    <span class="errors" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror  
   </div>
   </div>
     <h2 class="required">
@@ -218,14 +250,29 @@ form h2{
     
                 <div class="row g-3">
                 <div class="col-sm-11">
-                <input class="form-control" name="address" type="text" placeholder="Enter your address"></div>
+                <input value="{{old('address')}}" class="form-control  @error('address') is-invalid @enderror" name="address" type="text" placeholder="Enter your address">
+                 @error('address')
+                                    <span class="errors" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror  </div>
                 </div>
                 <div class="row g-3">
                 <div class="col-sm-4">
-                <input type="text" name="country" class="form-control" placeholder="Country" aria-label="country">
+                <input type="text" value="{{old('country')}}" name="country" class="form-control  @error('country') is-invalid @enderror" placeholder="Country" aria-label="country">
+                 @error('country')
+                                    <span class="errors" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror  
                 </div>
                 <div class="col-sm-7">
-                <input type="text" name="city" class="form-control" placeholder="city" aria-label="city">
+                <input type="text"value="{{old('city')}}" name="city" class="form-control  @error('city') is-invalid @enderror" placeholder="city" aria-label="city">
+             @error('city')
+                                    <span class="errors" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror  
   </div>
   </div>
    <h2 class="required">
@@ -233,7 +280,12 @@ form h2{
     </h2>
       <div class="row g-3">
   <div class="col-sm-11">
-    <input type="text" name="num_children" class="form-control" placeholder="Number of children" aria-label="n-children">
+    <input type="text" value="{{old('num_children')}}" name="num_children" class="form-control  @error('num_children') is-invalid @enderror" placeholder="Number of children" aria-label="n-children">
+     @error('num_children')
+                                    <span class="errors" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror  
   </div></div> 
   
   <h2 class="required">
@@ -241,10 +293,21 @@ form h2{
     </h2>
     <div class="row g-3">
   <div class="col-sm-4">
-    <input type="text" class="form-control" name="lower_age" placeholder="From -  " aria-label="n-children">
+    <input type="text" value="{{old('lower_age')}}" class="form-control  @error('lower_age') is-invalid @enderror" name="lower_age" placeholder="From -  " aria-label="n-children">
+     @error('lower_age')
+                                    <span class="errors" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror  
     <span style="font-size:10px;">For 1 child specify '0' here </span></div>
     <div class="col-sm-7">
-    <input type="text" class="form-control" name="upper_age" placeholder="to - " aria-label="n-children">
+    <input type="text" value="{{old('upper_age')}}" class="form-control  @error('upper_age') is-invalid @enderror" name="upper_age" placeholder="to - " aria-label="n-children">
+    <span style="font-size:10px;">For 1 child specify '1' here </span>
+     @error('upper_age')
+                                    <span class="errors" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror  
   </div>  </div></div>
 <div class="mb-5 pb-5 border-bottom">
                                                 <h2 class="required">Gender</h2>
@@ -264,11 +327,16 @@ form h2{
 <h2 class="required">Living Condition</h2>
                                                  <div class="row g-3">
                 <div class="col-sm-11">
-                            <select class="form-control" id="living" style="font-size:20px;" name="living_condition">
+                            <select class="form-control    @error('living_condition') is-invalid @enderror" id="living" style="font-size:20px;" name="living_condition">
                                  <option value="back_forth">Back and Forth</option>
                                 <option value="live_in">Live In</option>
                                 <option value="" selected>Choose living preference</option>
                             </select>
+                             @error('living_condition')
+                                    <span class="errors" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror  
                         </div></div></div>
                         <div class="mb-5 pb-5 border-bottom">
                            <h2 class="required">Break For Weekend</h2>
@@ -315,10 +383,15 @@ form h2{
                
                         <div class="input-group">
                          <span class="input-group-text" style="font-size: 12px">$</span>
-                           <input name="price" class="form-control" type="text" placeholder="Enter prefered Price">
+                           <input name="price" value="{{old('price')}}" class="form-control   @error('price') is-invalid @enderror" type="text" placeholder="Enter prefered Price">
 
                             <span class="input-group-text" style="font-size: 12px">/child</span>
-                        </div></div></div>  
+                             
+                        </div></div>@error('price')
+                                    <span class="errors" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror  </div>  
 <h2 class="required">Specify Starting Date</h2>
      <div class="row g-3">
   
@@ -329,40 +402,62 @@ form h2{
                                 <div class="input-group">
     <script>
     </script>
-    <input type="date" id="start" class="form-control" name="start_date"
+    <input type="date" id="start"value="{{old('start_date')}}" class="form-control  @error('start_date') is-invalid @enderror" name="start_date"
                                   max="2050-1-1">
-                            
-  </div></div> </div>  </div> </div>                                                       
+                             
+  </div></div>@error('start_date')
+                                    <span class="errors" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror   </div>  </div> </div>                                                       
                                                               <h2>Social Media Contact</h2>
                  <div class="row g-3">
                 <div  class="col-sm-5">
                 <div class="input-group">
                 <span class="input-group-text" style="font-size: 12px">Facebook</span>
-                <input class="form-control" name="facebook" type="text" placeholder="Facebook username">
-    
+                <input value="{{old('facebook')}}" class="form-control  @error('facebook') is-invalid @enderror" name="facebook" type="text" placeholder="Facebook username">
+         @error('facebook')
+                                    <span class="errors" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror  
             </div></div>
             <div  class="col-sm-6">
                 <div class="input-group">
                 <span class="input-group-text" style="font-size: 12px">Telegram</span>
-               <input class="form-control" name="telegram" type="text" placeholder="Telegram UserName or Number">
-               
+               <input value="{{old('telegram')}}" class="form-control  @error('telegram') is-invalid @enderror" name="telegram" type="text" placeholder="Telegram UserName or Number">
+                @error('telegram')
+                                    <span class="errors" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror  
             </div></div></div>
              <div class="row g-3">
             <div  class="col-sm-5">
                 <div class="input-group">
                 <span class="input-group-text" style="font-size: 12px">WhatsUp</span>
-                <input class="form-control" name="whatsup" type="text" placeholder="WhatsUp Number">
+                <input value="{{old('whatsup')}}" class="form-control  @error('whatsup') is-invalid @enderror" name="whatsup" type="text" placeholder="WhatsUp Number">
+                 @error('whatsup')
+                                    <span class="errors" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror  
             </div></div>
             <div  class="col-sm-6">
                 <div class="input-group">
                 <span class="input-group-text" style="font-size: 12px">Viber</span>
-                <input class="form-control" name="viber" type="text" placeholder="Viber Number">
+                <input value="{{old('viber')}}" class="form-control  @error('viber') is-invalid @enderror" name="viber" type="text" placeholder="Viber Number">
+                 @error('viber')
+                                    <span class="errors" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror  
             </div></div></div>
             <h2>Description</h2>
                  <div class="row g-3">
                 <div  class="col-sm-11">
                  <div class="input-group">
-            <textarea rows = "5" cols = "116" maxlength = "100" style="font-size: 20px" type="text" name ="description" placeholder="Provide description here to increase the chance of selectivity..."></textarea></div>
+            <textarea rows = "5" value="{{old('description')}}" cols = "116" maxlength = "100" style="font-size: 20px" type="text" name ="description" placeholder="Provide description here to increase the chance of selectivity..."></textarea></div>
             
                                         <div class="save">
     <button type="submit" class="btn btn-info btn-lg w-100" style="font-size : 15px;color:#fff; height: 30px;">
@@ -390,4 +485,11 @@ form h2{
 </div></div>
             </div>
 </div></div>
+@if (count($errors) > 0)
+    <script type="text/javascript">
+        $( document ).ready(function() {
+             $('#postJobModal').modal('show');
+        });
+    </script>
+  @endif
 @endsection

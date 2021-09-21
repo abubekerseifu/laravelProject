@@ -10,11 +10,10 @@ use DB;
 use View;
 use Stripe;
 use Session;
+use Carbon\Carbon;
 // use App\Http\Controllers\Log;
 class ProfileController extends Controller
 {
-    
-
     /**
      * Create a new controller instance.
      *
@@ -25,33 +24,32 @@ class ProfileController extends Controller
     // {
     //     $this->middleware('guest');
     // }
-
+    
     /**
      * Get a validator for an incoming registration request.
      *
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function validator(array $data)
+
+    protected function store(Request $request)
     {
-        return Validator::make($data, [
-            'fname' => ['required', 'string', 'max:255'],
-            'lname' => ['required', 'string', 'max:255'],
-            'numbers' => ['required', 'integer','unique:profile'],
+        $this->validate($request,[ 'fname' => ['required', 'string', 'max:255'],
+        'lname' => ['required', 'string', 'max:255'],
+        'image'=>['image', 'mimes:jpeg,png,jpg,gif,svg|max:2048'],
+        'numbers' => ['required', 'integer','unique:profile'],
             'address' => ['required', 'string'],
             'city' => ['required', 'string'],
             'country' => ['required', 'string'],
             'gender' => ['required'],
-            'birth_date'=>['required'],
+            'birth_date'=>['required','date','valid_birth_date'],
             'experience' => ['required', 'integer'],
             'price' => ['required'],
             'living_condition' => ['required'],
+        ],
+        ['birth_date.valid_birth_date' => 'You have to be older than 18',
+        'image.image' => 'selected file is not an image',
         ]);
-    }
-
-    
-    protected function store(Request $request)
-    {
         DB::transaction(function () use ($request){
        
          $profile=new Profile();
@@ -134,6 +132,22 @@ protected function ShowSingleProfileByParent($profile_id){
     return view('parent.viewbabysitterdetailbyparent')->with('profile',$profile);
 }
 protected function updateProfile(Request $request,$profile_id){
+    $this->validate($request,[ 'fname' => ['required', 'string', 'max:255'],
+        'lname' => ['required', 'string', 'max:255'],
+        'numbers' => ['required', 'integer',\Illuminate\Validation\Rule::unique('profile','numbers')->ignore($profile_id, 'profile_id')],
+        'image'=>['image', 'mimes:jpeg,png,jpg,gif,svg|max:2048'],
+            'address' => ['required', 'string'],
+            'city' => ['required', 'string'],
+            'country' => ['required', 'string'],
+            'gender' => ['required'],
+            'birth_date'=>['required','date','valid_birth_date'],
+            'experience' => ['required', 'integer'],
+            'price' => ['required'],
+            'living_condition' => ['required'],
+        ],
+        ['birth_date.valid_birth_date' => 'You have to be older than 18',
+        'image.image' => 'selected file is not an image',
+        ]);
          $profile = Profile::find($profile_id);
          $profile->fname= $request->fname;
          $profile->lname= $request->lname;

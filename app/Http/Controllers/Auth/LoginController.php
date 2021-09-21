@@ -51,11 +51,15 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+    
     public function login(Request $request){
         $input =$request->all();
-        $this->validate($request,['email'=>'required|email',
+        // $out = new \Symfony\Component\Console\Output\ConsoleOutput();
+         $this->validate($request,['email'=>'required|email|exists:users',
         'password'=>'required']);
+        
         if(auth()->attempt(array('email'=>$input['email'],'password'=>$input['password']))){
+            //$out->writeln("in big if ");
             if(auth()->user()->role=='Admin'){
                 return redirect()->route('admin.homedashboard');
             }
@@ -63,6 +67,7 @@ class LoginController extends Controller
                     return redirect()->route('home');
                 }
                 elseif(auth()->user()->role=='Babysitter'){
+                   // $out->writeln("in ");
                     return redirect()->route('home');
                 }
 
